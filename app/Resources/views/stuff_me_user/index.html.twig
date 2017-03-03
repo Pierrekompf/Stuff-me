@@ -1,0 +1,39 @@
+{% extends 'AppBundle:Default:admin.html.twig' %}
+
+{% block body %}
+    <h1>Stuff_me_users list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stuff_me_user in stuff_me_users %}
+            <tr>
+                <td><a href="{{ path('user_show', { 'id': stuff_me_user.id }) }}">{{ stuff_me_user.id }}</a></td>
+                <td>{{ stuff_me_user.pseudo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('user_show', { 'id': stuff_me_user.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_edit', { 'id': stuff_me_user.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('user_new') }}">Create a new stuff_me_user</a>
+        </li>
+    </ul>
+{% endblock %}
