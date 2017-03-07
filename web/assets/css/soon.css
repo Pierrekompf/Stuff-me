@@ -1,0 +1,84 @@
+/* ==================== 10.0 CLOCK COUNTDOWN ==================== */
+
+#clock-countdown {
+  color: #F3F4F8;
+  overflow: hidden;
+}
+
+.counter-container {
+  display: table;
+  margin: 0 auto;
+}
+
+#clock-countdown .counter-box {
+  display: block;
+  width: 160px;
+  text-align: center;
+  overflow: hidden;
+  padding: 10px 25px;
+  float: left;
+  margin: 25px 0;
+  position: relative;
+}
+
+#clock-countdown .number {
+  font-size: 80px;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+#clock-countdown span {
+  display: block;
+  font-size: 21px;
+  text-align: center;
+  font-weight: 400;
+  padding-top: 10px;
+  position: relative;
+  overflow: hidden;
+  color: #d32f2f;
+}
+
+#clock-countdown span:before {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: #d32f2f;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 0px;
+}
+
+
+
+#scrollbar::-webkit-scrollbar{
+width: 0.5em;
+background-color:#3D4351;
+} #scrollbar::-webkit-scrollbar-thumb{
+background-color:#d32f2f;
+}
+#scrollbar::-webkit-scrollbar-thumb:hover{
+background-color:#d32f2f;
+}
+#scrollbar::-webkit-scrollbar-thumb:active{
+background-color:#d32f2f;
+}
+
+
+#scrollbar::-moz-scrollbar{
+width: 0.5em;
+background-color:#3D4351;
+} #scrollbar::-moz-scrollbar-thumb{
+background-color:#d32f2f;
+}
+#scrollbar::-moz-scrollbar-thumb:hover{
+background-color:#d32f2f;
+}
+#scrollbar::-moz-scrollbar-thumb:active{
+background-color:#d32f2f;
+}

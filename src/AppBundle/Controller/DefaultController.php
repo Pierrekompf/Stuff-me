@@ -17,6 +17,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/en", name="index_en")
+     */
+
+    public function indexenAction() {
+        return $this->render("AppBundle:Default:index_en.html.twig");
+    }
+
+    /**
      * @Route("/admin", name="admin")
      */
 
