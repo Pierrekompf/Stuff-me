@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="stuff_me_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\stuff_me_userRepository")
  */
-class stuff_me_user
+class stuff_me_user extends BaseUser
 {
     /**
      * @var int
@@ -19,14 +20,7 @@ class stuff_me_user
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=255)
-     */
-    private $pseudo;
+    protected $id;
 
 
     /**
