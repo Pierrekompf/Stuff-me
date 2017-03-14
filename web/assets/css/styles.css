@@ -2,6 +2,16 @@
  * Globals
  */
 
+/* -------------------------------contact------------------------------- */
+#contact {
+  padding: 5%;
+}
+.form-horizontal .form-group label {
+  color: black;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+/* -------------------------------fin contact------------------------------- */
+
 /* Links */
 a,
 a:focus,
@@ -32,8 +42,6 @@ body {
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  background-image: url(../img/soon-bg.jpg);
   background-size: cover;
 }
 
