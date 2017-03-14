@@ -13,29 +13,38 @@
     </head>
     <body>
     {% block header %}
-        <nav class="navbar navbar-inverse">
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="{{ path('index') }}">Stuff Me</a>
+                    <a href="#page-top" class="page-scroll"><img class="logo" src="{{ asset('assets/img/logo.png') }}"/></a>
+                    <a class="navbar-brand page-scroll logotext">Stuff me</a>
                 </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ path('index') }}">Accueil<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ path('admin') }}">Administration</a></li>
-                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-                        <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="{{ path ('index') }}">Accueil</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path ('index') }}">Règles</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path ('index') }}">L'univers</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ path ('index') }}">Tutoriel</a>
+                        </li>
+                        <li class="inscription">
+                            <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+                        </li>
+                        <li class="connexion">
+                            <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+                        </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
     {% endblock %}
         <div>
