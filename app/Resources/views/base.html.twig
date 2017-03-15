@@ -38,7 +38,14 @@
                                 <a href="{{ path ('index') }}">Tutoriel</a>
                             </li>
                             <li class="inscription">
-                                <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="{{ path('index') }}" >
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+                                {% endif %}
+
                             </li>
                             <li class="connexion">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
