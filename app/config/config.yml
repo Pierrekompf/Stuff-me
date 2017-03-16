@@ -76,3 +76,8 @@ fos_user:
     from_email:
       address : lj.falcoz@radiorp.fr
       sender_name : Falcoz Louisjoseph
+      
+easy_admin:
+    entities:
+        - AppBundle\Entity\stuff_me_cocktail
+        - AppBundle\Entity\stuff_me_user
