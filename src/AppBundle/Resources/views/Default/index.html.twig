@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Stuff Me | Jeux de cartes
+{% endblock %}
+
+{% block body %}
+    <div id="page-top"></div>
+    <div class="zone" id="z1"><div class="zbackground"></div> </div>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-8 plateau"><img src="{{ asset('assets/img/plateau_2.png') }}"></div>
+            <div class="col-sm-offset-1 col-sm-3 classement">Classement</div>
+        </div>
+    </div>
+{% endblock %}

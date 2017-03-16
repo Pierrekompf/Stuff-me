@@ -2,6 +2,16 @@
  * Globals
  */
 
+/* -------------------------------contact------------------------------- */
+#contact {
+  padding: 5%;
+}
+.form-horizontal .form-group label {
+  color: black;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+/* -------------------------------fin contact------------------------------- */
+
 /* Links */
 a,
 a:focus,
@@ -19,163 +29,334 @@ a:hover {
   border: 1px solid #fff;
 }
 
-
-/*
- * Base structure
- */
-
-html,
-body {
+html, body {
   height: 100%;
-  background-color: #333;
-}
-body {
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  background-image: url(../img/soon-bg.jpg);
-  background-size: cover;
-}
-
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-  display: table;
   width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-}
-.site-wrapper-inner {
-  display: table-cell;
-  vertical-align: top;
-}
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
+  background-color: #fafafa;
 }
 
-/* Padding for spacing */
-.inner {
-  padding: 30px;
+/* -------------------------------DEBUT NAV------------------------------- */
+.navbar-default {
+  background-color: #3c3c3c;
+  border-color: transparent;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+  text-transform: uppercase;
+}
+.navbar-default .navbar-header .navbar-brand {
+  color: white;
+  text-transform: uppercase;
+  margin-left: -15px;
+  font-size: 1vw;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default .navbar-header .navbar-toggle {
+  font-size: 12px;
+  color: white;
+  text-transform: uppercase;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+@media (min-width: 1000px) {
+  .navbar-default .menu > li > a,
+  .navbar-default .menu > li > a:focus {
+    font-size: 1.3vw;
+  }
+  .navbar-default.affix .menu > li > a,
+  .navbar-default.affix .menu > li > a:focus {
+    font-size: 1.3vw;
+  }
+}
+@media (max-width: 999px) {
+  .navbar-default .menu > li > a,
+  .navbar-default .menu > li > a:focus {
+    font-size: 1.7vw;
+  }
+  .navbar-default.affix .menu > li > a,
+  .navbar-default.affix .menu > li > a:focus {
+    font-size: 1.7vw;
+  }
+}
+.navbar-default .menu > li > a,
+.navbar-default .menu > li > a:focus {
+  text-transform: uppercase;
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1vw;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default .menu > li > a:hover,
+.navbar-default .menu > li > a:focus:hover {
+  color: #cf3a35;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
 }
 
+/* ------NAV QUAND LARGEUR FENETRE/ECRAN > 768px------ */
+@media (min-width: 768px) {
+  .navbar-default {
+    background-color: transparent;
+    height:50px;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
+  .navbar-default .navbar-header .navbar-brand,
+  .navbar-default .navbar-header .navbar-brand:hover,
+  .navbar-default .navbar-header .navbar-brand:focus {
+    color: white;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
+  .navbar-default .menu {
+    height: 50px;
+    margin: 0;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
+  .navbar-default .menu > li {
+    height: 50px;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
 
-/*
- * Header
- */
-.masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  /* ---NAV A "X" PIXELS DU TOP--- */
+  .navbar-default.affix {
+    background-color: #1A1A1A;
+    border-color: rgba(34, 34, 34, 0.05);
+    height:50px;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
+  .navbar-default.affix .navbar-header .navbar-brand {
+    font-size: 0;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+  }
+  .navbar-default.affix .navbar-header .navbar-brand:hover,
+  .navbar-default.affix .navbar-header .navbar-brand:focus {
+    color: #ca3e3e;
+    -webkit-transition: all 0.85s;
+    -moz-transition: all 0.85s;
+    transition: all 0.85s;
+  }
+
+  /* ---FIN NAV A "X" PIXELS DU TOP--- */
+}
+/* ------FIN NAV QUAND LARGEUR FENETRE/ECRAN > 768px------ */
+
+.logo {
+  float: left;
+  padding-top: 5px;
+  margin-right: 10px;
+  height:50px
 }
 
-.masthead-nav > li {
-  display: inline-block;
+/* ------QUAND LARGEUR FENETRE/ECRAN < 768px------ */
+@media (max-width: 767px) {
+  .logo {
+    margin-left: 10px;
+  }
+
+  .navbar-default .menu > li > a, .navbar-default .menu > li > a:focus {
+    font-size: 2vw;
+    margin-left: 10px;
+  }
+  .navbar-default .navbar-header .navbar-brand {
+    font-size: 2vw;
+
+  }
 }
-.masthead-nav > li + li {
-  margin-left: 20px;
+/* ------FIN QUAND LARGEUR FENETRE/ECRAN < 768px------ */
+
+.menu li { /* corrige la nav wp */
+  float: right;
+  list-style: none;
 }
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
+.menu li a { /* corrige la nav wp */
+  text-decoration: none;
 }
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
+
+.navbar-default .navbar-nav > .active > a {
   background-color: transparent;
-  border-bottom-color: #a9a9a9;
-  border-bottom-color: rgba(255,255,255,.25);
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
 }
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: transparent;
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default.affix .navbar-nav > .active > a {
+  background-color: white;
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
 }
 
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  background-color: transparent;
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default.affix .navbar-nav > li > a:hover, .navbar-default.affix .navbar-nav > li > a:focus {
+  background-color: ghostwhite;
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.navbar-default .navbar-nav > .connexion > a {
+  color: #985f0d;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default.affix .navbar-nav > .connexion > a {
+  background-color: #449d44;
+  color: white;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.navbar-default .navbar-nav > .connexion > a:hover, .navbar-default .navbar-nav > .connexion > a:focus {
+  color: #843534;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+
+.navbar-default .navbar-nav > .inscription > a {
+  color: #985f0d;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.navbar-default.affix .navbar-nav > .inscription > a {
+  background-color: #985f0d;
+  color: white;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+/* -------------------------------FIN NAV------------------------------- */
+
+/* -------------------------------ZONES "PARALLAX"------------------------------- */
+.zone {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 40%;
+  width: 100%;
+}
+
+.zbackground {
+  width: 100%;
+  height: 100%;
+  background-color: #0f0f0f;
+  opacity: 0.7;
+  -moz-box-shadow: 0px 0px 20px 0px #656565;
+  -webkit-box-shadow: 0px 0px 20px 0px #656565;
+  -o-box-shadow: 0px 0px 20px 0px #656565;
+  box-shadow: 0px 0px 20px 0px #656565;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=20);
+}
+
+#z1 {
+  background-image: url("../img/zone1.jpg");
+}
+/* -------------------------------FIN ZONES "PARALLAX"------------------------------- */
+
+/* -------------------------------CONTENU ACCUEIL------------------------------- */
+.plateau img {
+  width: 100%;
+  -moz-box-shadow: 0px 0px 10px 0px #656565;
+  -webkit-box-shadow: 0px 0px 10px 0px #656565;
+  -o-box-shadow: 0px 0px 10px 0px #656565;
+  box-shadow: 0px 0px 10px 0px #656565;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=10);
+}
+
+.classement {
+  height: 500px;
+  background-color: #fafafa;
+  border: solid 1px black;
+}
+
+.content {
+  padding: 5%;
+}
+/* -------------------------------FIN CONTENU ACCUEIL------------------------------- */
+
+/* -------------------------------FOOTER------------------------------- */
+footer {
+  height: 80px;
+  background-color: #1A1A1A;
+  position: relative;
+}
+footer a {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+footer a:hover{
+  opacity: 0.7;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+footer p {
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Open Sans Condensed', sans-serif;
+  position: absolute;
+}
+footer .p1 {
+  right: 20px;
+  top: 30px;
+}
+footer .p2 {
+  left: 80px;
+  top: 30px;
+}
+
+@media (max-width: 410px) {
+  footer .p2 {
+    font-size: 0;
   }
-  .masthead-nav {
-    float: right;
-  }
 }
-
-
-/*
- * Cover
- */
-
-.cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
-
-/*
- * Footer
- */
-
-.mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
-}
-
-
-/*
- * Affix and center
- */
-
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
-  }
-}
-
-
-
-
-
-/* ==========================================================================
-Perso
-========================================================================== */
-
-.color {
-  color: #d32f2f;
-}
-
-h1, p {
-  font-family: 'Roboto', sans-serif;
-}
+/* -------------------------------FIN FOOTER------------------------------- */
