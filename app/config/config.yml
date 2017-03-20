@@ -76,8 +76,12 @@ fos_user:
     from_email:
       address : lj.falcoz@radiorp.fr
       sender_name : Falcoz Louisjoseph
-      
+
 easy_admin:
     entities:
         - AppBundle\Entity\stuff_me_cocktail
         - AppBundle\Entity\stuff_me_user
+    site_name: 'Stuff me'
+    design:
+            brand_color: '#E2C57A'
+            color_scheme: 'light'
