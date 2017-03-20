@@ -79,8 +79,8 @@ fos_user:
 
 easy_admin:
     entities:
-        - AppBundle\Entity\stuff_me_cocktail
         - AppBundle\Entity\stuff_me_user
+        - AppBundle\Entity\stuff_me_cocktail
     site_name: 'Stuff me'
     design:
             brand_color: '#E2C57A'
