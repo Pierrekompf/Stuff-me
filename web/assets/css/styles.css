@@ -270,6 +270,22 @@ html, body {
   transition: all 0.25s;
 }
 
+.navbar-default .navbar-nav > .admin > a {
+  color: #985f0d;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.navbar-default.affix .navbar-nav > .admin > a {
+  background-color: #5eb5e0;
+  color: white;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+
 /* -------------------------------FIN NAV------------------------------- */
 
 /* -------------------------------ZONES "PARALLAX"------------------------------- */
