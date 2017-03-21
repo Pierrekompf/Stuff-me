@@ -9,27 +9,27 @@
                 <div class="span4 offset2">
                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
                     <div class="form-group" id="fos_user_registration_form">
-                        <label for="email">{{ 'Email'|trans }}</label>
-                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'example@gmail.com'|trans } }) }}
+                        <label for="email">{{ 'form.email'|trans }}</label>
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans } }) }}
                         {{ form_errors(form.email) }}
 
-                        <label for="username">{{ 'Username'|trans }}</label>
-                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'username'|trans } }) }}
+                        <label for="username">{{ 'form.username'|trans }}</label>
+                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
                         {{ form_errors(form.username) }}
 
-                        <label for="password">{{ 'Password'|trans }}</label>
-                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'password'|trans } }) }}
+                        <label for="password">{{ 'form.password'|trans }}</label>
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
                         {{ form_errors(form.plainPassword.first) }}
 
-                        <label for="password">{{ 'Password Confirmation'|trans }}</label>
-                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'password'|trans } }) }}
+                        <label for="password">{{ 'form.password_confirmation'|trans }}</label>
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
                         {{ form_errors(form.plainPassword.second) }}
 
                         {{ form_rest(form) }}
 
                     </div>
                     <div>
-                        <input class="btn btn-block btn-primary" type="submit" value="{{ 'Submit'|trans }}" />
+                        <input class="btn btn-block btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
                     </div>
                     {{ form_end(form) }}
                 </div>

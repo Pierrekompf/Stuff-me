@@ -47,6 +47,18 @@
                                 {% endif %}
 
                             </li>
+
+                            <li class="admin">
+                                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                                    <a href="{{ path('easyadmin') }}">
+                                        Administration
+                                    </a>
+                                {% else %}
+
+                                {% endif %}
+
+                            </li>
+
                             <li class="connexion">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <a href="{{ path('fos_user_security_logout') }}">
