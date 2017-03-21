@@ -19,6 +19,10 @@ a:hover {
   color: #fff;
 }
 
+.fos_user_user_show  a {
+  color : black;
+}
+
 /* Custom default button */
 .btn-default,
 .btn-default:hover,
@@ -376,3 +380,9 @@ footer .p2 {
   }
 }
 /* -------------------------------FIN FOOTER------------------------------- */
+
+/*--------------------------------FOSUSER SHOw et EDIT -------------------- */
+
+.fos_user_user_show{
+  margin-top: 7%;
+}
