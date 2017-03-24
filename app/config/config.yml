@@ -78,10 +78,34 @@ fos_user:
       sender_name : Falcoz Louisjoseph
 
 easy_admin:
-    entities:
-        - AppBundle\Entity\stuff_me_user
-        - AppBundle\Entity\stuff_me_cocktail
     site_name: 'Stuff me'
     design:
-            brand_color: '#E2C57A'
-            color_scheme: 'light'
+                brand_color: '#E2C57A'
+                color_scheme: 'light'
+    entities:
+        stuff_me_user:
+                    class: AppBundle\Entity\stuff_me_user
+                    label: 'stuff_me_user'
+                    password_encoding: { algorithm: 'bcrypt', cost: 12 }
+                    list:
+                        actions:
+                            - { name: 'show', icon: 'search', label: 'Show' }
+                            - { name: 'edit', icon: 'pencil', label: 'Edit' }
+                            - { name: 'delete', icon: 'times', label: 'Delete' }
+                        title: "Liste des Utilisateurs :"
+                        fields:
+                            - 'id'
+                            - 'username'
+                            - 'email'
+                            - 'enabled'
+                            - { property: 'last_login', type: 'datetime' }
+                        show:
+                            title: 'User : (%%entity_id%%)'
+
+                    form:
+                        fields:
+                            - 'username'
+                            - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                            - 'email'
+                            - 'enabled'
+                            - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN': 'ROLE_SUPER_ADMIN' } } }

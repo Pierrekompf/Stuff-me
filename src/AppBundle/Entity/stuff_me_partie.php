@@ -24,20 +24,6 @@ class stuff_me_partie
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_joueur1", type="bigint")
-     */
-    private $partieJoueur1;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="partie_joueur2", type="bigint")
-     */
-    private $partieJoueur2;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="partie_joueur1_score", type="bigint")
      */
     private $partieJoueur1Score;
@@ -51,6 +37,17 @@ class stuff_me_partie
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user")
+     */
+    private $joueur1;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user")
+     */
+    private $joueur2;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -58,54 +55,6 @@ class stuff_me_partie
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set partieJoueur1
-     *
-     * @param integer $partieJoueur1
-     *
-     * @return stuff_me_partie
-     */
-    public function setPartieJoueur1($partieJoueur1)
-    {
-        $this->partieJoueur1 = $partieJoueur1;
-
-        return $this;
-    }
-
-    /**
-     * Get partieJoueur1
-     *
-     * @return int
-     */
-    public function getPartieJoueur1()
-    {
-        return $this->partieJoueur1;
-    }
-
-    /**
-     * Set partieJoueur2
-     *
-     * @param integer $partieJoueur2
-     *
-     * @return stuff_me_partie
-     */
-    public function setPartieJoueur2($partieJoueur2)
-    {
-        $this->partieJoueur2 = $partieJoueur2;
-
-        return $this;
-    }
-
-    /**
-     * Get partieJoueur2
-     *
-     * @return int
-     */
-    public function getPartieJoueur2()
-    {
-        return $this->partieJoueur2;
     }
 
     /**

@@ -22,7 +22,6 @@ class stuff_me_user extends BaseUser
      */
     protected $id;
 
-
     /**
      * Get id
      *
@@ -33,4 +32,3 @@ class stuff_me_user extends BaseUser
         return $this->id;
     }
 }
-
