@@ -25,28 +25,28 @@ class stuff_me_user extends BaseUser
     /**
     * @var string
     *
-    * @ORM\Column(name="nationalite", type="string", length=255)
+    * @ORM\Column(name="nationalite", type="string", length=255, nullable=true)
      */
     private $nationalite;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="win", type="bigint")
+     * @ORM\Column(name="win", type="bigint", nullable=true)
      */
     private $win;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="loose", type="bigint")
+     * @ORM\Column(name="loose", type="bigint", nullable=true)
      */
     private $loose;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="totale_score", type="bigint")
+     * @ORM\Column(name="totale_score", type="bigint", nullable=true)
      */
     private $totale_score;
 
