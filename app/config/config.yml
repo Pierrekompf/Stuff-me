@@ -99,6 +99,10 @@ easy_admin:
                             - 'email'
                             - 'enabled'
                             - { property: 'last_login', type: 'datetime' }
+                            - 'nationalite'
+                            - 'win'
+                            - 'loose'
+                            - 'totale_score'
                         show:
                             title: 'User : (%%entity_id%%)'
 
@@ -109,3 +113,7 @@ easy_admin:
                             - 'email'
                             - 'enabled'
                             - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN': 'ROLE_SUPER_ADMIN' } } }
+                            - { property: 'nationalite', type_options: { required: false }}
+                            - { property: 'win', type_options: { required: false }}
+                            - { property: 'loose', type_options: { required: false }}
+                            - { property: 'totale_score', type_options: { required: false }}
