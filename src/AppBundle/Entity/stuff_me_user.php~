@@ -51,6 +51,16 @@ class stuff_me_user extends BaseUser
     private $totale_score;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\stuff_me_partie", mappedBy="joueur1")
+     */
+    private $partie1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\stuff_me_partie", mappedBy="joueur2")
+     */
+    private $partie2;
+
+    /**
      * Get id
      *
      * @return int

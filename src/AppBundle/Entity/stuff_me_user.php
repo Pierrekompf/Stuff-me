@@ -51,6 +51,16 @@ class stuff_me_user extends BaseUser
     private $totale_score;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\stuff_me_partie", mappedBy="joueur1")
+     */
+    private $partie1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\stuff_me_partie", mappedBy="joueur2")
+     */
+    private $partie2;
+
+    /**
      * Get id
      *
      * @return int
@@ -154,5 +164,73 @@ class stuff_me_user extends BaseUser
     public function getTotaleScore()
     {
         return $this->totale_score;
+    }
+
+    /**
+     * Add partie1
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $partie1
+     *
+     * @return stuff_me_user
+     */
+    public function addPartie1(\AppBundle\Entity\stuff_me_partie $partie1)
+    {
+        $this->partie1[] = $partie1;
+
+        return $this;
+    }
+
+    /**
+     * Remove partie1
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $partie1
+     */
+    public function removePartie1(\AppBundle\Entity\stuff_me_partie $partie1)
+    {
+        $this->partie1->removeElement($partie1);
+    }
+
+    /**
+     * Get partie1
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPartie1()
+    {
+        return $this->partie1;
+    }
+
+    /**
+     * Add partie2
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $partie2
+     *
+     * @return stuff_me_user
+     */
+    public function addPartie2(\AppBundle\Entity\stuff_me_partie $partie2)
+    {
+        $this->partie2[] = $partie2;
+
+        return $this;
+    }
+
+    /**
+     * Remove partie2
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $partie2
+     */
+    public function removePartie2(\AppBundle\Entity\stuff_me_partie $partie2)
+    {
+        $this->partie2->removeElement($partie2);
+    }
+
+    /**
+     * Get partie2
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPartie2()
+    {
+        return $this->partie2;
     }
 }

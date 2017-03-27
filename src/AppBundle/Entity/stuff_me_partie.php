@@ -37,12 +37,12 @@ class stuff_me_partie
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1")
      */
     private $joueur1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie2")
      */
     private $joueur2;
 
@@ -104,5 +104,52 @@ class stuff_me_partie
     {
         return $this->partieJoueur2Score;
     }
-}
 
+    /**
+     * Set joueur1
+     *
+     * @param \AppBundle\Entity\stuff_me_user $joueur1
+     *
+     * @return stuff_me_partie
+     */
+    public function setJoueur1(\AppBundle\Entity\stuff_me_user $joueur1 = null)
+    {
+        $this->joueur1 = $joueur1;
+
+        return $this;
+    }
+
+    /**
+     * Get joueur1
+     *
+     * @return \AppBundle\Entity\stuff_me_user
+     */
+    public function getJoueur1()
+    {
+        return $this->joueur1;
+    }
+
+    /**
+     * Set joueur2
+     *
+     * @param \AppBundle\Entity\stuff_me_user $joueur2
+     *
+     * @return stuff_me_partie
+     */
+    public function setJoueur2(\AppBundle\Entity\stuff_me_user $joueur2 = null)
+    {
+        $this->joueur2 = $joueur2;
+
+        return $this;
+    }
+
+    /**
+     * Get joueur2
+     *
+     * @return \AppBundle\Entity\stuff_me_user
+     */
+    public function getJoueur2()
+    {
+        return $this->joueur2;
+    }
+}

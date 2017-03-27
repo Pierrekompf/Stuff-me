@@ -56,6 +56,17 @@ class stuff_me_cartes
      */
     private $carteOrdre;
 
+    /**
+     * Many stuff_me_cartes have One stuff_me_cocktail.
+     * @ORM\ManyToOne(targetEntity="stuff_me_cocktail")
+     */
+    private $modeles;
+
+    /**
+     * Many stuff_me_cartes have One stuff_me_partie
+     * @ORM\ManyToOne(targetEntity="stuff_me_partie")
+     */
+    private $parties;
 
     /**
      * Get id
@@ -186,5 +197,52 @@ class stuff_me_cartes
     {
         return $this->carteOrdre;
     }
-}
 
+    /**
+     * Set modeles
+     *
+     * @param \AppBundle\Entity\stuff_me_cocktail $modeles
+     *
+     * @return stuff_me_cartes
+     */
+    public function setModeles(\AppBundle\Entity\stuff_me_cocktail $modeles = null)
+    {
+        $this->modeles = $modeles;
+
+        return $this;
+    }
+
+    /**
+     * Get modeles
+     *
+     * @return \AppBundle\Entity\stuff_me_cocktail
+     */
+    public function getModeles()
+    {
+        return $this->modeles;
+    }
+
+    /**
+     * Set parties
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $parties
+     *
+     * @return stuff_me_cartes
+     */
+    public function setParties(\AppBundle\Entity\stuff_me_partie $parties = null)
+    {
+        $this->parties = $parties;
+
+        return $this;
+    }
+
+    /**
+     * Get parties
+     *
+     * @return \AppBundle\Entity\stuff_me_partie
+     */
+    public function getParties()
+    {
+        return $this->parties;
+    }
+}
