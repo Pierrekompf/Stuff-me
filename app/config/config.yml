@@ -139,6 +139,6 @@ easy_admin:
                                 fields:
                                     - 'cocktail_nom'
                                     - { property: 'cocktail_categorie', type: 'choice', type_options: { multiple: false, choices: { 'biere': 'Biere', 'tequila': 'Tequila', 'rhum': 'Rhum', 'vodka': 'Vodka', 'cognac': 'Cognac' } } }
-                                    - { property: 'cocktail_extra', type: 'choice' }
+                                    - 'cocktail_extra'
                                     - 'cocktail_description'
                                     - 'cocktail_image'
