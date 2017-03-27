@@ -120,25 +120,3 @@ easy_admin:
         stuff_me_cocktail:
                             class: AppBundle\Entity\stuff_me_cocktail
                             label: 'Cocktails'
-                            list:
-                                actions:
-                                    - { name: 'show', icon: 'search', label: 'Show' }
-                                    - { name: 'edit', icon: 'pencil', label: 'Edit' }
-                                    - { name: 'delete', icon: 'times', label: 'Delete' }
-                                title: "Cocktails"
-                                fields:
-                                    - 'id'
-                                    - 'cocktail_nom'
-                                    - 'cocktail_categorie'
-                                    - 'cocktail_extra'
-                                    - 'cocktail_description'
-                                    - 'cocktail_image'
-                                show:
-                                    title: 'Cocktail : (%%entity_id%%)'
-                            form:
-                                fields:
-                                    - 'cocktail_nom'
-                                    - { property: 'cocktail_categorie', type: 'choice', type_options: { multiple: false, choices: { 'biere': 'Biere', 'tequila': 'Tequila', 'rhum': 'Rhum', 'vodka': 'Vodka', 'cognac': 'Cognac' } } }
-                                    - 'cocktail_extra'
-                                    - 'cocktail_description'
-                                    - 'cocktail_image'
