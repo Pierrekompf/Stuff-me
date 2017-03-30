@@ -32,7 +32,7 @@
                                 <a href="{{ path ('index') }}">Règles</a>
                             </li>
                             <li class="">
-                                <a href="{{ path ('index') }}">L'univers</a>
+                                <a href="{{ path ('univers') }}">L'univers</a>
                             </li>
                             <li class="">
                                 <a href="{{ path ('index') }}">Tutoriel</a>
@@ -48,16 +48,16 @@
 
                             </li>
 
-                            {#<li class="mesparties">#}
-                                {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}#}
-                                    {#<a href="{{ path('mesparties') }}" >#}
-                                        {#Mes Parties#}
-                                    {#</a>#}
-                                {#{% else %}#}
-{##}
-                                {#{% endif %}#}
-{##}
-                            {#</li>#}
+                            <li class="mesparties">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="{{ path('mesparties') }}" >
+                                        Mes Parties
+                                    </a>
+                                {% else %}
+
+                                {% endif %}
+
+                            </li>
 
                             <li class="admin">
                                 {% if is_granted("ROLE_SUPER_ADMIN") %}
