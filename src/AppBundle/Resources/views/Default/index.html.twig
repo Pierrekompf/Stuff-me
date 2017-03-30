@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+    {% extends "::base.html.twig" %}
 
 {% block title %}
     Stuff Me | Jeux de cartes
@@ -10,7 +10,27 @@
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-8 plateau"><img src="{{ asset('assets/img/plateau_2.png') }}"></div>
-            <div class="col-sm-offset-1 col-sm-3 classement">Classement</div>
+            <div class="col-sm-offset-1 col-sm-3 classement">
+                <h2>Classement FR :</h2>
+                <ul>
+                    {% for user in  classement %}
+                        <li>
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h2>Classement International :</h2>
+                <ul>
+                    {% for user in classementinter %}
+                        <li>
+                            {{ user.nationalite }}
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

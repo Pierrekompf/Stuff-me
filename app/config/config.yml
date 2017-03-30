@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -76,6 +78,9 @@ fos_user:
     from_email:
       address : lj.falcoz@radiorp.fr
       sender_name : Falcoz Louisjoseph
+    registration:
+      form:
+          name: app_user_registration
 
 easy_admin:
     site_name: 'Stuff me'
@@ -120,3 +125,6 @@ easy_admin:
         stuff_me_cocktail:
                             class: AppBundle\Entity\stuff_me_cocktail
                             label: 'Cocktails'
+        stuff_me_partie:
+                            class: AppBundle\Entity\stuff_me_partie
+                            label: 'Parties'

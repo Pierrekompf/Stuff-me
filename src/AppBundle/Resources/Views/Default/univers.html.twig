@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <ul>
+        {% for cocktail in  cocktailtous %}
+            <li>{{ cocktail.cocktailNom }}
+                {{ cocktail.cocktailCategorie }}
+                {{ cocktail.cocktailDescription }}
+                {{ cocktail.cocktailImage }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block title %}
+    Univers
+{% endblock %}
+

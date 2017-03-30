@@ -32,7 +32,7 @@
                         <a href="{{ path ('index') }}">Règles</a>
                     </li>
                     <li class="">
-                        <a href="{{ path ('index') }}">L'univers</a>
+                        <a href="{{ path ('univers') }}">L'univers</a>
                     </li>
                     <li class="">
                         <a href="{{ path ('index') }}">Tutoriel</a>
@@ -40,10 +40,21 @@
                     <li class="inscription">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <a href="{{ path('fos_user_profile_show') }}" >
-                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                {{ app.user.username }}
                             </a>
                         {% else %}
                             <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+                        {% endif %}
+
+                    </li>
+
+                    <li class="mesparties">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('mesparties') }}" >
+                                Mes Parties
+                            </a>
+                        {% else %}
+
                         {% endif %}
 
                     </li>
@@ -85,7 +96,7 @@
             {% endfor %}
         {% endif %}
 
-        <div>
+        <div class="container">
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
