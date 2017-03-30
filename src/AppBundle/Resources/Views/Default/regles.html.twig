@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Stuff Me | Règles
+{% endblock %}
+
+{% block body %}
+    <div class="zone" id="z0">
+        <div class="zbackground"></div>
+    </div>
+    <div class="contentrgl container-fluid">
+        <div class="r1">
+            <h2>Le jeu</h2>
+            <p class="hideme">Deux jeunes stagiaires se disputent la place du barman. <br/>Affrontez votre adversaire et tentez de le vaincre en battant son chiffre d’affaire !
+            </p>
+        </div>
+        <div class="r2">
+            <h2>Le but du jeu</h2>
+            <p class="hideme">Vous devez réaliser un meilleur chiffre d’affaire que votre adversaire. <br/>Pour cela, vous devez servir différents cocktails à base d’alcool disparate.
+            </p>
+        </div>
+        <div class="r3">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.9" alt="dos de cartes"/>
+                    <p>On dispose les 5 alcools entre les deux joueurs, on mélange les cocktails et on en distribue 8 à chaque joueur.<br/><br/> Le reste des cocktails constitue la pioche. Le barman actif doit choisir un cocktail pour commencer ou continuer une suite en posant son cocktail sur le comptoir. <br/> <br/> Le joueur pioche ensuite un nouveau cocktail dans la pioche ou dans les cocktails qui ont été défaussées précédemment.</p>
+                </div>
+                <div class="col-sm-4">
+                    <img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.8" alt="dos de cartes"/>
+                    <p>La pile de défausse fonctionne selon le principe suivant : Si le joueur ne peut ou ne veut pas placer un cocktail, il doit se défausser d’un cocktail, qu’il doit poser face visible sur la carte alcool correspondante et en piocher une autre.
+                        <br/> <br/> Chaque joueur doit remplir ses propres suites mais peut aussi voir les suites réalisées par son adversaire.</p>
+                </div>
+                <div class="col-sm-4">
+                    <img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.7" alt="dos de cartes"/>
+                    <p>Pour constituer une suite, les cocktails doivent appartenir au même objectif. Le joueur peut commencer par n’importe quel cocktail mais la suite doit être réalisée dans un ordre croissant. Pour gagner plus de points, le joueur peut commencer sa suite par une ou plusieurs cartes extra. <br/> <br/> <b>ATTENTION !</b> Chaque suite commencée, même par un cocktail extra seront comptabilisée.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

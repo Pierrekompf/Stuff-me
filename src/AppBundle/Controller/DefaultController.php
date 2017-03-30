@@ -17,13 +17,13 @@ class DefaultController extends Controller
         $classement = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
             array('nationalite' => 'FR'),
             array('totale_score' => 'desc'),
-            10
+            5
         );
 
         $classementinter = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
             array (),
             array('totale_score' => 'desc'),
-            10
+            5
         );
 
         return $this->render("AppBundle:Default:index.html.twig", ['classement'=>$classement , 'classementinter'=>$classementinter]);
@@ -52,5 +52,11 @@ class DefaultController extends Controller
     }
 
 
+    /**
+     * @Route ("/regles", name="regles")
+     */
 
+    public function reglesAction(){
+        return $this->render('@App/Default/regles.html.twig');
+    }
 }
