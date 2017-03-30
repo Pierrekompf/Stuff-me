@@ -1,90 +1,6 @@
-<!DOCTYPE html>
-<html>
+{% extends '::base.html.twig' %}
 
-<head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Stuff Me{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
-</head>
-
-<body>
-{% block header %}
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a href="#page-top" class="page-scroll"><img class="logo" src="{{ asset('assets/img/logo.png') }}"/></a>
-                <a class="navbar-brand page-scroll logotext">Stuff me</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="{{ path ('index') }}">Accueil</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path ('index') }}">Règles</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path ('univers') }}">L'univers</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path ('index') }}">Tutoriel</a>
-                    </li>
-                    <li class="inscription">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('fos_user_profile_show') }}" >
-                                {{ app.user.username }}
-                            </a>
-                        {% else %}
-                            <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
-                        {% endif %}
-
-                    </li>
-
-                    <li class="mesparties">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('mesparties') }}" >
-                                Mes Parties
-                            </a>
-                        {% else %}
-
-                        {% endif %}
-
-                    </li>
-
-                    <li class="admin">
-                        {% if is_granted("ROLE_SUPER_ADMIN") %}
-                            <a href="{{ path('easyadmin') }}">
-                                Administration
-                            </a>
-                        {% else %}
-
-                        {% endif %}
-
-                    </li>
-
-                    <li class="connexion">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('fos_user_security_logout') }}">
-                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                            </a>
-                        {% else %}
-                            <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-                        {% endif %}
-
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
+{% block body %}
 
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
@@ -101,25 +17,4 @@
             {% endblock fos_user_content %}
         </div>
 
-    {% block javascripts %}
-        <!-- JS Basique (Bootstrap & JQuery) -->
-        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <!-- JS de la barre de nav -->
-        <script src="{{ asset('assets/js/creative.min.js') }}"></script>
-        <!-- JS du scroll -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="{{ asset('assets/js/scrollreveal.min.js') }}"></script>
-        <!-- JS de la barre de nav -->
-        <!-- JS effet parallax -->
-        <script src="{{ asset('assets/js/jquery.parallax-1.1.3.js') }}"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('#z1').parallax("50%", 0.5);
-                $('#z2').parallax("50%", 0.5);
-                $('#z3').parallax("50%", 0.5);
-            })
-        </script>
-    {% endblock %}
-    </body>
-</html>
+{% endblock %}
