@@ -16,12 +16,14 @@ class DefaultController extends Controller
     public function indexAction() {
         $classement = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
             array('nationalite' => 'FR'),
-            array('totale_score' => 'desc')
+            array('totale_score' => 'desc'),
+            10
         );
 
         $classementinter = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
             array (),
-            array('totale_score' => 'desc')
+            array('totale_score' => 'desc'),
+            10
         );
 
         return $this->render("AppBundle:Default:index.html.twig", ['classement'=>$classement , 'classementinter'=>$classementinter]);
