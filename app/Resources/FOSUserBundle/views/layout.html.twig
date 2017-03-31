@@ -1,66 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
-            <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
-            <link rel="stylesheet" href="{{ asset('assets/css/soon.css') }}" />
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-            <link rel="stylesheet" href="{{ asset('assets/fonts/font-awesome/css/font-awesome.min.css') }}" />
-            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        {% endblock %}
-    </head>
-    <body>
-    {% block header %}
-        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                    </button>
-                    <a href="#page-top" class="page-scroll"><img class="logo" src="{{ asset('assets/img/logo.png') }}"/></a>
-                    <a class="navbar-brand page-scroll logotext">Stuff me</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active">
-                            <a href="{{ path ('index') }}">Accueil</a>
-                        </li>
-                        <li class="">
-                            <a href="{{ path ('index') }}">Règles</a>
-                        </li>
-                        <li class="">
-                            <a href="{{ path ('index') }}">L'univers</a>
-                        </li>
-                        <li class="">
-                            <a href="{{ path ('index') }}">Tutoriel</a>
-                        </li>
-                        <li class="inscription">
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+{% extends '::base.html.twig' %}
 
-                                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
-
-                            {% else %}
-                                <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
-                            {% endif %}
-
-                        </li>
-
-                        <li class="connexion">
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="{{ path('fos_user_security_logout') }}">
-                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                </a>
-                            {% else %}
-                                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    {% endblock %}
+{% block body %}
 
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
@@ -72,21 +12,14 @@
             {% endfor %}
         {% endif %}
 
-        <div>
+    <div class="zone" id="z0">
+        <div class="zbackground"></div>
+    </div>
+
+<section id="contact" class="col-lg-offset-2" style="margin-bottom: 150px; margin-top: 50px;">
             {% block fos_user_content %}
             {% endblock fos_user_content %}
-        </div>
+</section>
 
-        {% block javascripts %}
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/jquery-1.11.3.min.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/jquery.backstretch.min.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/jquery.countdown.min.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/jquery.particleground.min.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/main.js') }}"></script>
-            <script src="{{ asset('assets/js/soon/main_en.js') }}"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        {% endblock %}
-    </body>
-</html>
+
+{% endblock %}

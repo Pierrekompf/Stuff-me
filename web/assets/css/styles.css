@@ -1,113 +1,43 @@
-/*
- * Globals
- */
-
-/* -------------------------------contact------------------------------- */
-#contact {
-  padding: 5%;
-}
-.form-horizontal .form-group label {
-  color: black;
-  font-family: 'Open Sans Condensed', sans-serif;
-}
-/* -------------------------------fin contact------------------------------- */
-
-/* Links */
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
-
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
-html, body {
+html {
   height: 100%;
   width: 100%;
-  background-color: #fafafa;
+}
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: Dreams American Diner demo;
+  src: url("fonts/Dreams-American-Diner-demo.otf") format("opentype");
+}
+@font-face {
+  font-family: Hamburger Heaven;
+  src: url("fonts/Hamburger-Heaven.ttf") format("truetype");
 }
 
 /* -------------------------------DEBUT NAV------------------------------- */
 .navbar-default {
-  background-color: #3c3c3c;
+  background-color: #5a3d28;
   border-color: transparent;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-  text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand {
   color: white;
-  text-transform: uppercase;
   margin-left: -15px;
   font-size: 1vw;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
   transition: all 0.25s;
+  font-family: 'Hamburger Heaven';
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-size: 12px;
   color: white;
   text-transform: uppercase;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
 }
-@media (min-width: 1000px) {
-  .navbar-default .menu > li > a,
-  .navbar-default .menu > li > a:focus {
-    font-size: 1.3vw;
-  }
-  .navbar-default.affix .menu > li > a,
-  .navbar-default.affix .menu > li > a:focus {
-    font-size: 1.3vw;
-  }
-}
-@media (max-width: 999px) {
-  .navbar-default .menu > li > a,
-  .navbar-default .menu > li > a:focus {
-    font-size: 1.7vw;
-  }
-  .navbar-default.affix .menu > li > a,
-  .navbar-default.affix .menu > li > a:focus {
-    font-size: 1.7vw;
-  }
-}
-.navbar-default .menu > li > a,
-.navbar-default .menu > li > a:focus {
-  text-transform: uppercase;
-  color: white;
-  height: 100%;
-  width: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1vw;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default .menu > li > a:hover,
-.navbar-default .menu > li > a:focus:hover {
-  color: #cf3a35;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-
-/* ------NAV QUAND LARGEUR FENETRE/ECRAN > 768px------ */
 @media (min-width: 768px) {
   .navbar-default {
     background-color: transparent;
@@ -137,11 +67,8 @@ html, body {
     -moz-transition: all 0.25s;
     transition: all 0.25s;
   }
-
-  /* ---NAV A "X" PIXELS DU TOP--- */
   .navbar-default.affix {
-    background-color: #1A1A1A;
-    border-color: rgba(34, 34, 34, 0.05);
+    background-color: #5a3d28;
     height:50px;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -160,31 +87,28 @@ html, body {
     -moz-transition: all 0.85s;
     transition: all 0.85s;
   }
-
-  /* ---FIN NAV A "X" PIXELS DU TOP--- */
 }
-/* ------FIN NAV QUAND LARGEUR FENETRE/ECRAN > 768px------ */
-
 .logo {
   float: left;
-  padding-top: 5px;
-  margin-right: 10px;
-  height:50px
+  padding-top: 15px;
+  margin-right: 15px;
+  height:35px;
 }
-
-/* ------QUAND LARGEUR FENETRE/ECRAN < 768px------ */
 @media (max-width: 767px) {
   .logo {
     margin-left: 10px;
   }
-
-  .navbar-default .menu > li > a, .navbar-default .menu > li > a:focus {
-    font-size: 2vw;
-    margin-left: 10px;
-  }
   .navbar-default .navbar-header .navbar-brand {
-    font-size: 2vw;
-
+    font-size: 14px;
+  }
+  nav ul li {
+    text-align: center;
+  }
+  nav ul .active {
+    background-color: white;
+  }
+  nav ul li:hover {
+    background-color: #9d9d9d;
   }
 }
 /* ------FIN QUAND LARGEUR FENETRE/ECRAN < 768px------ */
@@ -196,152 +120,92 @@ html, body {
 .menu li a { /* corrige la nav wp */
   text-decoration: none;
 }
+@media (min-width: 768px) {
+  .navbar-default .navbar-nav > li > a {
+    text-decoration: none;
+    color: white;
+    z-index: 1;
+    background-color: transparent;
+    width: inherit;
+  }
 
-.navbar-default .navbar-nav > .active > a {
-  background-color: transparent;
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default .navbar-nav > .active > a:hover {
-  background-color: transparent;
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default.affix .navbar-nav > .active > a {
-  background-color: white;
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
+  .navbar-default .navbar-nav > li > a:hover {
+    color: white;
+  }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  background-color: transparent;
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default.affix .navbar-nav > li > a:hover, .navbar-default.affix .navbar-nav > li > a:focus {
-  background-color: ghostwhite;
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
+  .navbar-default .navbar-nav > li > a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -3px;
+    background: #e2c57a;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: .25s linear;
+  }
 
-.navbar-default .navbar-nav > .connexion > a {
-  color: #985f0d;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default.affix .navbar-nav > .connexion > a {
-  background-color: #449d44;
-  color: white;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
+  .navbar-default .navbar-nav > li > a:hover:before,
+  .navbar-default .navbar-nav > li > a:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
 
-.navbar-default .navbar-nav > .connexion > a:hover, .navbar-default .navbar-nav > .connexion > a:focus {
-  color: #843534;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
+  .navbar-default .navbar-nav > li > a:hover {
+    background-color: transparent;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus,
+  .navbar-default .navbar-nav > .active > a:focus:hover {
+    color: white;
+  }
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: inherit;
+  }
+  .navbar-default .navbar-nav > .active > a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -3px;
+    background: #e2c57a;
+    visibility: visible;
+    transform: scaleX(1);
+  }
+  .navbar-nav > li > a {
+    margin: 15px;
+    padding: 0;
+    text-transform: uppercase;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+  .navbar-default .navbar-nav > .connexion > a,
+  .navbar-default .navbar-nav > .connexion > a:hover,
+  .navbar-default .navbar-nav > .connexion > a:focus,
+  .navbar-default .navbar-nav > .connexion > a:focus:hover{
+    color: #e2c57a;
+  }
+  .navbar-default .navbar-nav > .connexion > a:hover:before,
+  .navbar-default .navbar-nav > .connexion > a:focus:before {
+    visibility: hidden;
+    transform: scaleX(0);
+  }
 }
-
-
-.navbar-default .navbar-nav > .inscription > a {
-  color: #985f0d;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.navbar-default.affix .navbar-nav > .inscription > a {
-  background-color: #985f0d;
-  color: white;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-
-.navbar-default .navbar-nav > .admin > a {
-  color: #985f0d;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-
-.navbar-default.affix .navbar-nav > .admin > a {
-  background-color: #5eb5e0;
-  color: white;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  transition: all 0.25s;
-}
-
-
 /* -------------------------------FIN NAV------------------------------- */
 
-/* -------------------------------ZONES "PARALLAX"------------------------------- */
-.zone {
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  height: 40%;
-  width: 100%;
-}
-
-.zbackground {
-  width: 100%;
-  height: 100%;
-  background-color: #0f0f0f;
-  opacity: 0.7;
-  -moz-box-shadow: 0px 0px 20px 0px #656565;
-  -webkit-box-shadow: 0px 0px 20px 0px #656565;
-  -o-box-shadow: 0px 0px 20px 0px #656565;
-  box-shadow: 0px 0px 20px 0px #656565;
-  filter: progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=20);
-}
-
-#z1 {
-  background-image: url("../img/zone1.jpg");
-}
-/* -------------------------------FIN ZONES "PARALLAX"------------------------------- */
-
-/* -------------------------------CONTENU ACCUEIL------------------------------- */
-.plateau img {
-  width: 100%;
-  -moz-box-shadow: 0px 0px 10px 0px #656565;
-  -webkit-box-shadow: 0px 0px 10px 0px #656565;
-  -o-box-shadow: 0px 0px 10px 0px #656565;
-  box-shadow: 0px 0px 10px 0px #656565;
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=10);
-}
-
-.classement {
-  height: 500px;
-  background-color: #fafafa;
-  border: solid 1px black;
-}
-
-.content {
-  padding: 5%;
-}
-/* -------------------------------FIN CONTENU ACCUEIL------------------------------- */
-
 /* -------------------------------FOOTER------------------------------- */
-footer {
-  height: 80px;
-  background-color: #1A1A1A;
+.footer {
+  height: 280px;
+  background-color: #564a41;
   position: relative;
+  -moz-box-shadow: 0px -1px 5px 0px #656565;
+  -webkit-box-shadow: 0px -1px 5px 0px #656565;
+  -o-box-shadow: 0px -1px 5px 0px #656565;
+  box-shadow: 0px -1px 5px 0px #656565;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=90, Strength=5);
 }
-footer a {
+.footer a {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -349,25 +213,27 @@ footer a {
   -moz-transition: all 0.25s;
   transition: all 0.25s;
 }
-footer a:hover{
+.footer a:hover{
   opacity: 0.7;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
   transition: all 0.25s;
 }
-footer p {
-  text-transform: uppercase;
+.footer p {
   color: white;
   font-family: 'Open Sans Condensed', sans-serif;
   position: absolute;
 }
-footer .p1 {
+.footer .p1 {
   right: 20px;
   top: 30px;
+  font-family: 'Roboto', sans-serif;
 }
-footer .p2 {
+.footer .p2 {
   left: 80px;
   top: 30px;
+  font-size: 20px;
+  font-family: 'Dreams American Diner demo';
 }
 
 @media (max-width: 410px) {
@@ -376,3 +242,63 @@ footer .p2 {
   }
 }
 /* -------------------------------FIN FOOTER------------------------------- */
+
+/* -------------------------------fleche backtop------------------------------- */
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: #7b5e42 url('../img/cd-top-arrow.svg') no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.no-touch .cd-top:hover {
+  background-color: #564a41;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 50px;
+    width: 50px;
+    right: 30px;
+    bottom: 30px;
+  }
+}
+/* -------------------------------fin fleche backtop------------------------------- */
+
+/* -------------------------------------Classement ----------------------------------*/
+
+.classement {
+  color : #e2c57a;
+}

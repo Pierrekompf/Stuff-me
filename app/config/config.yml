@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -76,12 +78,53 @@ fos_user:
     from_email:
       address : lj.falcoz@radiorp.fr
       sender_name : Falcoz Louisjoseph
+    registration:
+      form:
+          name: app_user_registration
 
 easy_admin:
-    entities:
-        - AppBundle\Entity\stuff_me_user
-        - AppBundle\Entity\stuff_me_cocktail
     site_name: 'Stuff me'
     design:
-            brand_color: '#E2C57A'
-            color_scheme: 'light'
+                brand_color: '#E2C57A'
+                color_scheme: 'light'
+    entities:
+        stuff_me_user:
+                    class: AppBundle\Entity\stuff_me_user
+                    label: 'Users'
+                    password_encoding: { algorithm: 'bcrypt', cost: 12 }
+                    list:
+                        actions:
+                            - { name: 'show', icon: 'search', label: 'Show' }
+                            - { name: 'edit', icon: 'pencil', label: 'Edit' }
+                            - { name: 'delete', icon: 'times', label: 'Delete' }
+                        title: "Utilisateurs"
+                        fields:
+                            - 'id'
+                            - 'username'
+                            - 'email'
+                            - 'enabled'
+                            - { property: 'last_login', type: 'datetime' }
+                            - 'nationalite'
+                            - 'win'
+                            - 'loose'
+                            - 'totale_score'
+                        show:
+                            title: 'User : (%%entity_id%%)'
+
+                    form:
+                        fields:
+                            - 'username'
+                            - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                            - 'email'
+                            - 'enabled'
+                            - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN': 'ROLE_SUPER_ADMIN' } } }
+                            - { property: 'nationalite', type_options: { required: false }}
+                            - { property: 'win', type_options: { required: false }}
+                            - { property: 'loose', type_options: { required: false }}
+                            - { property: 'totale_score', type_options: { required: false }}
+        stuff_me_cocktail:
+                            class: AppBundle\Entity\stuff_me_cocktail
+                            label: 'Cocktails'
+        stuff_me_partie:
+                            class: AppBundle\Entity\stuff_me_partie
+                            label: 'Parties'

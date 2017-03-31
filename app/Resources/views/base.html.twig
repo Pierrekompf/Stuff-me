@@ -7,6 +7,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
             <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+            <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}" />
+            <link rel="stylesheet" href="{{ asset('assets/css/regles.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
@@ -20,27 +22,27 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                         </button>
-                        <a href="#page-top" class="page-scroll"><img class="logo" src="{{ asset('assets/img/logo.png') }}"/></a>
-                        <a class="navbar-brand page-scroll logotext">Stuff me</a>
+                        <a href="#page-top" class="page-scroll"><img class="logo" src="{{ asset('assets/img/logo_menu.svg') }}"/></a>
+                        <a class="navbar-brand page-scroll logotext">by GRAV</a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active">
+                            <li class="">
                                 <a href="{{ path ('index') }}">Accueil</a>
                             </li>
                             <li class="">
-                                <a href="{{ path ('index') }}">Règles</a>
+                                <a href="{{ path ('regles') }}">Règles</a>
                             </li>
                             <li class="">
-                                <a href="{{ path ('index') }}">L'univers</a>
+                                <a href="{{ path ('univers') }}">L'univers</a>
                             </li>
                             <li class="">
-                                <a href="{{ path ('index') }}">Tutoriel</a>
+                                <a href="{{ path ('tutoriel') }}">Tutoriel</a>
                             </li>
-                            <li class="inscription">
+                            <li class="">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                    <a href="{{ path('index') }}" >
-                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                    <a href="{{ path('fos_user_profile_show') }}" >
+                                        {{ app.user.username }}
                                     </a>
                                 {% else %}
                                     <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
@@ -48,7 +50,17 @@
 
                             </li>
 
-                            <li class="admin">
+                            <li class="mesparties">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('mesparties') }}" >
+                            Mes Parties
+                            </a>
+                            {% else %}
+
+                            {% endif %}
+                            </li>
+
+                            <li class="">
                                 {% if is_granted("ROLE_SUPER_ADMIN") %}
                                     <a href="{{ path('easyadmin') }}">
                                         Administration
@@ -73,18 +85,26 @@
                     </div>
                 </div>
             </nav>
+
         {% endblock %}
 
         {% block body %}
 
+
+
         {% endblock %}
 
         {% block footer %}
-            <a target="_blank" href="{{ path('index') }}"><img src="{{ asset('assets/img/facebook.svg') }}" height="50px" alt="facebook"/></a>
-            <p class="p1">© 2017 | Tous droits réservés</p>
-            <p class="p2">Stuff Me</p>
+            <div class="footer">
+                <a target="_blank" href="https://www.facebook.com/StuffmeGame/?fref=ts"><img src="{{ asset('assets/img/facebook.svg') }}" height="50px" alt="facebook"/></a>
+                <p class="p1">© 2017 | Tous droits réservés</p>
+                <p class="p2">Stuff Me</p>
+            </div>
         {% endblock %}
 
+        {% block top %}
+            <a href="#0" class="cd-top">Top</a>
+        {% endblock %}
 
         {% block javascripts %}
             <!-- JS Basique (Bootstrap & JQuery) -->
@@ -96,6 +116,8 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
             <script src="{{ asset('assets/js/scrollreveal.min.js') }}"></script>
             <!-- JS de la barre de nav -->
+            <script src="{{ asset('assets/js/toparrow.js') }}"></script>
+            <script src="{{ asset('assets/js/carousel.js') }}"></script>
             <!-- JS effet parallax -->
             <script src="{{ asset('assets/js/jquery.parallax-1.1.3.js') }}"></script>
             <script type="text/javascript">
@@ -104,6 +126,45 @@
                     $('#z2').parallax("50%", 0.5);
                     $('#z3').parallax("50%", 0.5);
                 })
+            </script>
+            <!-- JS des cartes -->
+            <script>
+                function allowDrop(ev) {
+                    ev.preventDefault();
+                }
+
+                function drag(ev) {
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
+
+                function drop(ev) {
+                    ev.preventDefault();
+                    var data = ev.dataTransfer.getData("text");
+                    ev.target.appendChild(document.getElementById(data));
+                }
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#z0').parallax("50%", 0.5);
+                })
+            </script>
+            <!-- JS animations texte-->
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    /* Every time the window is scrolled ... */
+                    $(window).scroll( function(){
+                        /* Check the location of each desired element */
+                        $('.hideme').each( function(i){
+                            var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                            var bottom_of_window = $(window).scrollTop() + $(window).height();
+                            /* If the object is completely visible in the window, fade it it */
+                            if( bottom_of_window > bottom_of_object ){
+
+                                $(this).animate({'opacity':'1'},500);
+                            }
+                        });
+                    });
+                });
             </script>
         {% endblock %}
     </body>

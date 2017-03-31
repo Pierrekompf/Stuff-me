@@ -1,0 +1,22 @@
+<svg id="ff22248d-4a60-4f0f-bf0b-ccda3856458f" data-name="c7b75ced-0aae-4738-8d4b-5edb917bf451" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 853.54 220.5">
+  <defs>
+    <style>
+      .\38 db52bf9-5cc6-4456-96a3-23fc23c565df {
+        fill: #e2c57a;
+        stroke: #e2c57a;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <title>logo_menu</title>
+  <g>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M12.3,230.4L4.5,189.9H51.3q5.1,0,5.1-4.5V145.8q0-4.5-1.8-5.4t-6.3-.9H25.8a53.62,53.62,0,0,1-9.15-.75,17.15,17.15,0,0,1-7.8-3.45,17.7,17.7,0,0,1-5.4-7.5q-2-4.8-2-12.9V41.1q0-12.9,7-20.55T30.9,12.9h60l7.5,40.5H49.2q-5.4,0-5.4,4.8V97.8q0,3.3,1.65,4.5a8.37,8.37,0,0,0,5,1.2H77.7q10.5,0,16,5t5.6,17.25v71.7q0,18-7.35,25.5t-26,7.5H12.3Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M200.1,12.9l10.8,40.5H181.8v177H137.4V53.4H108.3l11.4-40.5h80.4Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M256.8,230.4q-18.9,0-26.4-7.8t-7.5-25.8V12.9h44.4V187.5a6.87,6.87,0,0,0,.75,3.6q0.75,1.2,3.45,1.2h15.3q2.7,0,3.45-1.2a6.92,6.92,0,0,0,.75-3.6V12.9h44.4V196.8q0,18-7.5,25.8t-26.4,7.8H256.8Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M353.4,12.9H438l7.5,40.5H398.1V105h36v37.5h-36v87.9H353.4V12.9Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M459,12.9h84.6l7.5,40.5H503.7V105h36v37.5h-36v87.9H459V12.9Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M644.39,127.8V230.4h-42.3V12.9H648l23.7,91.8,23.7-91.8h46.2V230.4H699.3V127.8l-27.6,87Z" transform="translate(0.05 -11.4)"/>
+    <path class="8db52bf9-5cc6-4456-96a3-23fc23c565df" d="M759.59,12.9h84.6l7.5,40.5h-47.4V105h36v37.5h-36v47.4h45.6l-7.5,40.5h-82.8V12.9h0Z" transform="translate(0.05 -11.4)"/>
+  </g>
+</svg>
