@@ -187,4 +187,3 @@ class stuff_me_cocktail
         return $this->cocktailImage;
     }
 }
-

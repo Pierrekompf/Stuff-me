@@ -17,7 +17,7 @@ class RegistrationType extends AbstractType
         return 'fos_user_registration';
     }
 
-    public function getBlockPrefix()
+    public function getName()
     {
         return 'app_user_registration';
     }

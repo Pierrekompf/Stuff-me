@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * stuff_me_user
@@ -26,8 +27,15 @@ class stuff_me_user extends BaseUser
     * @var string
     *
     * @ORM\Column(name="nationalite", type="string", length=255, nullable=true)
-     */
-    private $nationalite;
+    * @Assert\Length(
+    *     min=2,
+    *     max=5,
+    *     minMessage="The nationnalite is too short.",
+    *     maxMessage="The nationalite is too long.",
+    *     groups={"Registration", "Profile"}
+    * )
+    */
+    protected $nationalite;
 
     /**
      * @var int
