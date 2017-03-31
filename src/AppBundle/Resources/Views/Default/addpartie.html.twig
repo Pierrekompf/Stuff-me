@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="zone" id="z0">
+        <div class="zbackground"></div>
+    </div>
+
+    <table class="table">
+        {% for joueur in joueurs if joueur.username != user.username %}
+            <tr>
+                <td>{{ joueur.username }}</td>
+                <td><a href="{{ path('creer_partie', {'joueur':joueur.id}) }}">Inviter à jouer</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

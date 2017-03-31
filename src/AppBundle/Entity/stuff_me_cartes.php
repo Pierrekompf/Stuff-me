@@ -24,37 +24,40 @@ class stuff_me_cartes
     /**
      * @var int
      *
-     * @ORM\Column(name="joueur_id_", type="bigint")
+     * @ORM\Column(name="joueur_id_", type="bigint", nullable=true)
      */
     private $joueurId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_id_", type="bigint")
+     * @ORM\Column(name="partie_id_", type="bigint", nullable=true)
      */
     private $partieId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cocktail_id_", type="bigint")
+     * @ORM\Column(name="cocktail_id_", type="bigint", nullable=true)
      */
     private $cocktailId;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="carte_situation", type="boolean")
+     * @ORM\Column(name="carte_situation", type="string", length=255)
      */
     private $carteSituation;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="carte_ordre", type="bigint")
+     * @ORM\Column(name="carte_ordre", type="bigint", nullable=true)
      */
     private $carteOrdre;
+
+
+
 
     /**
      * Many stuff_me_cartes have One stuff_me_cocktail.
@@ -67,6 +70,9 @@ class stuff_me_cartes
      * @ORM\ManyToOne(targetEntity="stuff_me_partie")
      */
     private $parties;
+
+
+
 
     /**
      * Get id

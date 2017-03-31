@@ -24,25 +24,25 @@ class stuff_me_partie
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_joueur1_score", type="bigint")
+     * @ORM\Column(name="partie_joueur1_score", type="bigint", nullable=true)
      */
     private $partieJoueur1Score;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_joueur2_score", type="bigint")
+     * @ORM\Column(name="partie_joueur2_score", type="bigint", nullable=true)
      */
     private $partieJoueur2Score;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1", fetch="EAGER")
      */
     private $joueur1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie2")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie2", fetch="EAGER")
      */
     private $joueur2;
 
