@@ -9,11 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 class UniversController extends DefaultController{
 
     /**
-     * @Route("/tutoriek", name="tutoriel")
+     * @Route("/univers", name="univers")
      */
 
-    public function tutorielAction(){
-        return $this->render('@App/Default/tutoriel.html.twig');
+    public function universAction(){
+
+        $cocktails = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
+
+        return $this->render("AppBundle:Default:univers.html.twig", ['cocktailtous'=>$cocktails] );
     }
 
 }

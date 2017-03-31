@@ -6,14 +6,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class PartieController extends Controller
-{
+class TutorielController extends DefaultController{
+
     /**
-     * @Route ("/mesparties", name="mesparties")
+     * @Route("/tutoriel", name="tutoriel")
      */
 
-    public function mespartiesAction(){
-        return $this->render('@App/Default/mesparties.html.twig');
+    public function tutorielAction(){
+        return $this->render('@App/Default/tutoriel.html.twig');
     }
 
 }
