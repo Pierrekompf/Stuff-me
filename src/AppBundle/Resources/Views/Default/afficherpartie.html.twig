@@ -1,0 +1,90 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="zone" id="z0">
+        <div class="zbackground"></div>
+    </div>
+
+    <h1>Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}</h1>
+    <h3>Score :
+        <h4>Joueur 1 : {{ parties[0].partiejoueur1score }}</h4>
+        <h4>Joueur 2 : {{ parties[0].partiejoueur2score }}</h4>
+    </h3>
+
+
+    <div>
+        <h2>Cartes du joueur 1</h2>
+        <ul>
+            {% set i = 0 %}
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ1' %}
+                {% set i = i + 1 %}
+                <li>
+                    {{ carte.modeles.cocktailNom }} - {{ carte.modeles.cocktailCategorie }}
+                    - {{ carte.modeles.cocktailExtra }} - {{ carte.modeles.cocktailValeur }} - {{ carte.modeles.cocktailImage }}
+                    <a href="">Jouer</a> -
+                    <a href="">Défausser</a>
+                </li>
+            {% endfor %}
+            {% if i < 8 %}
+                <a href="">piocher</a>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Cartes du joueur 2</h2>
+        <ul>
+            {% set t = 0 %}
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ2' %}
+                {% set t = t + 1 %}
+                <li>
+                    {{ carte.modeles.cocktailNom }} - {{ carte.modeles.cocktailCategorie }}
+                    - {{ carte.modeles.cocktailExtra }} - {{ carte.modeles.cocktailValeur }}
+                    <a href="">Jouer</a> -
+                    <a href="">Défausser</a>
+                </li>
+            {% endfor %}
+            {% if t < 8 %}
+                <a href="">piocher</a>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Pioche</h2>
+        <ul>
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'pioche' %}
+
+                <li>{{ carte.modeles.cocktailNom }} - {{ carte.modeles.cocktailCategorie }}
+                    - {{ carte.modeles.cocktailExtra }} - {{ carte.modeles.cocktailValeur }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h2>Défausse</h2>
+        <ul>
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'defausse' %}
+
+                <li>
+                    {{ carte.modeles.cocktailNom }} - {{ carte.modeles.cocktailCategorie }}
+                    - {{ carte.modeles.cocktailExtra }} - {{ carte.modeles.cocktailValeur }}
+                    - {{ carte.carteOrdre }} -
+                    <a href="">Récuperer</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Sur le plateau</h2>
+        <ul>
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'plateau' %}
+
+                <li>{{ carte.modeles.cocktailNom }} - {{ carte.modeles.cocktailCategorie }}
+                    - {{ carte.modeles.cocktailExtra }} - {{ carte.modeles.cocktailValeur }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+{% endblock %}

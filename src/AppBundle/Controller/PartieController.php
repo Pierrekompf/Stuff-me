@@ -46,6 +46,9 @@ class PartieController extends Controller
         $partie = new stuff_me_partie();
         $partie->setJoueur1($user);
         $partie->setJoueur2($joueur);
+        $partie->setPartieTour($user);
+        $partie->setPartieJoueur1Score(0);
+        $partie->setPartieJoueur2Score(0);
         $em = $this->getDoctrine()->getManager();
         $em->persist($partie);
         $em->flush();
@@ -79,5 +82,17 @@ class PartieController extends Controller
         }
         $em->flush();
         return $this->render('@App/Default/partie.html.twig', ['partie' => $partie, 'user' => $user]);
+    }
+
+    /**
+     * @param stuff_me_partie $id
+     * @Route("/afficher/{id}", name="afficherpartie")
+     */
+    public function afficherPartieAction(stuff_me_partie $id)
+    {
+        $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findAll();
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findBy(['id' => $id]);
+        $user = $this->getUser();
+        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
     }
 }

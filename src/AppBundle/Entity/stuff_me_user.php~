@@ -294,5 +294,39 @@ class stuff_me_user extends BaseUser
         return $this->partie2;
     }
 
+    /**
+     * Add tour
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $tour
+     *
+     * @return stuff_me_user
+     */
+    public function addTour(\AppBundle\Entity\stuff_me_partie $tour)
+    {
+        $this->tour[] = $tour;
+
+        return $this;
+    }
+
+    /**
+     * Remove tour
+     *
+     * @param \AppBundle\Entity\stuff_me_partie $tour
+     */
+    public function removeTour(\AppBundle\Entity\stuff_me_partie $tour)
+    {
+        $this->tour->removeElement($tour);
+    }
+
+    /**
+     * Get tour
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTour()
+    {
+        return $this->tour;
+    }
+
 
 }

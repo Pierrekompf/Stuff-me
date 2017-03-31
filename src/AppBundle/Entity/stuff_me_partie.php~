@@ -46,6 +46,11 @@ class stuff_me_partie
      */
     private $joueur2;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", fetch="EAGER")
+     */
+    private $partieTour;
+
 
     /**
      * Get id
@@ -151,5 +156,29 @@ class stuff_me_partie
     public function getJoueur2()
     {
         return $this->joueur2;
+    }
+
+    /**
+     * Set partieTour
+     *
+     * @param \AppBundle\Entity\stuff_me_user $partieTour
+     *
+     * @return stuff_me_partie
+     */
+    public function setPartieTour(\AppBundle\Entity\stuff_me_user $partieTour = null)
+    {
+        $this->partieTour = $partieTour;
+
+        return $this;
+    }
+
+    /**
+     * Get partieTour
+     *
+     * @return \AppBundle\Entity\stuff_me_user
+     */
+    public function getPartieTour()
+    {
+        return $this->partieTour;
     }
 }
