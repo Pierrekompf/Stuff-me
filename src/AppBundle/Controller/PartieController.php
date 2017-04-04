@@ -22,15 +22,25 @@ class PartieController extends Controller
         return $this->render('@App/Default/mesparties.html.twig', ['user' => $user]);
     }
 
+    /**
+     * @param stuff_me_partie $id
+     * @Route("/afficher/{id}", name="afficherpartie")
+     */
+    public function afficherPartieAction(stuff_me_partie $id)
+    {
+        $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findAll();
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findBy(['id' => $id]);
+        $user = $this->getUser();
+        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
+    }
 
-    //Liste des users pour créer les parties
+    //Gestion de création de partie
     /**
      * @Route("/parties/add", name="jouer")
      */
     public function addPartieAction()
     {
         $user = $this->getUser();
-        // récupérer tous les joueurs existants
         $joueurs = $this->getDoctrine()->getRepository('AppBundle:stuff_me_user')->findAll();
         return $this->render("@App/Default/addpartie.html.twig", ['user' => $user, 'joueurs' => $joueurs]);
     }
@@ -49,18 +59,29 @@ class PartieController extends Controller
         $partie->setPartieTour($user);
         $partie->setPartieJoueur1Score(0);
         $partie->setPartieJoueur2Score(0);
+        //Si le joueur n'as jamais jouer, set win et loose à 0
+        if (is_null($user->getWin())) {
+            $user->setWin(0);
+            $user->setLoose(0);
+            $user->setTotaleScore(0);
+        }
+        if (is_null($joueur->getWin())) {
+            $joueur->setWin(0);
+            $joueur->setLoose(0);
+            $joueur->setTotaleScore(0);
+        }
+        //Distribution des cartes
         $em = $this->getDoctrine()->getManager();
         $em->persist($partie);
         $em->flush();
-        // récupérer les cartes
-        $modeles = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
-        //on mélange les cartes
-        shuffle($modeles);
+        $cocktails = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
+        //mélange des cartes
+        shuffle($cocktails);
         for($i = 0; $i<8; $i++)
         {
             $cartes = new stuff_me_cartes();
             $cartes->setParties($partie);
-            $cartes->setModeles($modeles[$i]);
+            $cartes->setModeles($cocktails[$i]);
             $cartes->setCarteSituation('mainJ1');
             $em->persist($cartes);
         }
@@ -68,31 +89,21 @@ class PartieController extends Controller
         {
             $cartes = new stuff_me_cartes();
             $cartes->setParties($partie);
-            $cartes->setModeles($modeles[$i]);
+            $cartes->setModeles($cocktails[$i]);
             $cartes->setCarteSituation('mainJ2');
             $em->persist($cartes);
         }
-        for($i = 16; $i<count($modeles); $i++)
+        for($i = 16; $i<count($cocktails); $i++)
         {
             $cartes = new stuff_me_cartes();
             $cartes->setParties($partie);
-            $cartes->setModeles($modeles[$i]);
+            $cartes->setModeles($cocktails[$i]);
             $cartes->setCarteSituation('pioche');
             $em->persist($cartes);
         }
         $em->flush();
-        return $this->render('@App/Default/partie.html.twig', ['partie' => $partie, 'user' => $user]);
+        return $this->render('@App/Default/partiecreer.html.twig', ['partie' => $partie, 'user' => $user]);
     }
 
-    /**
-     * @param stuff_me_partie $id
-     * @Route("/afficher/{id}", name="afficherpartie")
-     */
-    public function afficherPartieAction(stuff_me_partie $id)
-    {
-        $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findAll();
-        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findBy(['id' => $id]);
-        $user = $this->getUser();
-        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
-    }
+
 }
