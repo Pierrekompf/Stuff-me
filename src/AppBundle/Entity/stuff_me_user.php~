@@ -29,7 +29,7 @@ class stuff_me_user extends BaseUser
     * @ORM\Column(name="nationalite", type="string", length=255, nullable=true)
     * @Assert\Length(
     *     min=2,
-    *     max=5,
+    *     max=25,
     *     minMessage="The nationnalite is too short.",
     *     maxMessage="The nationalite is too long.",
     *     groups={"Registration", "Profile"}

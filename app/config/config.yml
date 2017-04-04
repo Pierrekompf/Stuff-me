@@ -79,8 +79,9 @@ fos_user:
       address : lj.falcoz@radiorp.fr
       sender_name : Falcoz Louisjoseph
     registration:
-      form:
-          name: app_user_registration
+        form:
+            type: AppBundle\Form\RegistrationType
+
 
 easy_admin:
     site_name: 'Stuff me'
