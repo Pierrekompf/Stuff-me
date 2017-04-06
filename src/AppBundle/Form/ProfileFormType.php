@@ -9,7 +9,7 @@ class ProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nationalite');
+        $builder->add('nationalite', 'Symfony\Component\Form\Extension\Core\Type\CountryType');
     }
 
     public function getParent()

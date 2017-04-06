@@ -105,5 +105,47 @@ class PartieController extends Controller
         return $this->render('@App/Default/partiecreer.html.twig', ['partie' => $partie, 'user' => $user]);
     }
 
+    /**
+     * @param stuff_me_partie $partieid
+     * @Route("/piocherj1/{partieid}", name="piocherj1")
+     */
+    public function piocherj1Action($partieid)
+    {
+        $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
+        $em = $this->getDoctrine()->getManager();
+        $cartesPioche->setCarteSituation('mainJ1');
+        $em->flush();
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+    }
+    /**
+     * @param stuff_me_partie $partieid
+     * @Route("/piocherj2/{partieid}", name="piocherj2")
+     */
+    public function piocherj2Action($partieid)
+    {
+        $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
+        $em = $this->getDoctrine()->getManager();
+        $cartesPioche->setCarteSituation('mainJ2');
+        $em->flush();
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+    }
+
+    /**
+     * @param stuff_me_partie $partieid
+     * @Route ("/changetour/{partieid}", name="changetour")
+     */
+    public function changetourAction($partieid)
+    {
+        $tour = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
+        $em = $this->getDoctrine()->getManager();
+        if ($tour->getPartieTour() == $tour->getJoueur1()){
+         $tour->setPartieTour($tour->getJoueur2());
+        }
+        elseif ($tour->getPartieTour() == $tour->getJoueur2()){
+            $tour->setPartieTour($tour->getJoueur1());
+        }
+        $em->flush();
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+    }
 
 }
