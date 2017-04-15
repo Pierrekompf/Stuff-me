@@ -20,7 +20,7 @@
                 <li>
                      {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} : {{ carte.modeles.cocktailValeur }}
                     {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="{{ path('jouerCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
+                        <a href="{{ path('jouerJ1', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
                         <a href="">Défausser</a>
 
                     {% endif %}
@@ -53,7 +53,7 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} : {{ carte.modeles.cocktailValeur }}
                     {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="{{ path('jouerCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
+                        <a href="{{ path('jouerJ2', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
                         <a href="">Défausser</a>
                     {% else %}
 
@@ -67,6 +67,8 @@
             {% endif %}
         </ul>
     </div>
+
+
 
     <!--systeme de passement de tour automatique fonctionnelle
     <div>
@@ -91,9 +93,21 @@
                 <ul>
                     <h3>Bière :</h3>
 
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateau' %}
+                    <h4>Plateau de {{ parties[0].joueur1 }} </h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ1' %}
 
                     <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
+
+                    {% endfor %}
+
+
+
+                    <h4>Plateau de {{ parties[0].joueur2 }} </h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ2' %}
+
+                        <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
 
                     {% endfor %}
 
@@ -106,9 +120,20 @@
 
                     <h3>Rhum :</h3>
 
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateau' %}
+                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ1' %}
 
                     <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
+
+                    {% endfor %}
+
+
+                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ2' %}
+
+                        <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
 
                     {% endfor %}
 
@@ -120,9 +145,20 @@
                 <ul>
                     <h3>Tequila :</h3>
 
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateau' %}
+                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ1' %}
 
                     <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
+
+                    {% endfor %}
+
+
+                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ2' %}
+
+                        <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
 
                     {% endfor %}
 
@@ -134,9 +170,20 @@
                 <ul>
                     <h3>Vodka</h3>
 
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateau'  %}
+                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ1'  %}
 
                     <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
+
+                    {% endfor %}
+
+
+                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ2'  %}
+
+                        <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
 
                     {% endfor %}
 
@@ -148,9 +195,20 @@
                 <ul>
                     <h3>Cognac :</h3>
 
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateau' %}
+                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ1' %}
 
                     <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
+
+                    {% endfor %}
+
+
+                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
+
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ2' %}
+
+                        <li>{{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }}</li>
 
                     {% endfor %}
 
