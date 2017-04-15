@@ -19,14 +19,14 @@
                 {% set i = i + 1 %}
                 <li>
                      {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} : {{ carte.modeles.cocktailValeur }}
-                    {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
+                    {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 and parties[0].j1cartejouer == '0' %}
                         <a href="{{ path('jouerJ1', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
                         <a href="">Défausser</a>
 
                     {% endif %}
                 </li>
             {% endfor %}
-            {% if i < 8 %}
+            {% if i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
                 <a href="{{ path('piocherj1', {'partieid': parties[0].id}) }}">piocher</a>
             {% endif %}
         </ul>
@@ -52,7 +52,7 @@
                 {% set t = t + 1 %}
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} : {{ carte.modeles.cocktailValeur }}
-                    {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                    {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 and parties[0].j2cartejouer == '0'%}
                         <a href="{{ path('jouerJ2', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
                         <a href="">Défausser</a>
                     {% else %}
@@ -62,7 +62,7 @@
 
             {% endfor %}
 
-            {% if t < 8 %}
+            {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
                 <a href="{{ path('piocherj2', {'partieid': parties[0].id}) }}">piocher</a>
             {% endif %}
         </ul>

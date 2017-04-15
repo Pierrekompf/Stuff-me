@@ -59,6 +59,8 @@ class PartieController extends Controller
         $partie->setPartieTour($user);
         $partie->setPartieJoueur1Score(0);
         $partie->setPartieJoueur2Score(0);
+        $partie->setJ1cartejouer(0);
+        $partie->setJ2cartejouer(0);
         //Si le joueur n'as jamais jouer, set win et loose à 0
         if (is_null($user->getWin())) {
             $user->setWin(0);
@@ -113,13 +115,11 @@ class PartieController extends Controller
     {
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $j1jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
         $em = $this->getDoctrine()->getManager();
         $cartesPioche->setCarteSituation('mainJ1');
-        if ($partie->getPartieTour() == $partie->getJoueur1()) {
-            $partie->setPartieTour($partie->getJoueur2());
-        } else {
-            $partie->setPartieTour($partie->getJoueur1());
-        }
+        $j1jouer->setJ1cartejouer('0');
+        $partie->setPartieTour($partie->getJoueur2());
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
@@ -131,13 +131,11 @@ class PartieController extends Controller
     {
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $j2jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
         $em = $this->getDoctrine()->getManager();
         $cartesPioche->setCarteSituation('mainJ2');
-        if ($partie->getPartieTour() == $partie->getJoueur1()) {
-            $partie->setPartieTour($partie->getJoueur2());
-        } else {
-            $partie->setPartieTour($partie->getJoueur1());
-        }
+        $j2jouer->setJ2cartejouer('0');
+        $partie->setPartieTour($partie->getJoueur1());
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
@@ -168,6 +166,7 @@ class PartieController extends Controller
     {
         //recup de la carte à jouer, et de sa catégorie
         $carteAJouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $j1jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
         $categorie = $carteAJouer->getModeles()->getCocktailCategorie();
         $valeur = $carteAJouer->getModeles()->getCocktailValeur();
         //recup des cartes sur le plateau
@@ -191,12 +190,14 @@ class PartieController extends Controller
                 //on joue la carte
                 $em = $this->getDoctrine()->getManager();
                 $carteAJouer->setCarteSituation('plateauJ1');
+                $j1jouer->setJ1cartejouer('1');
                 $em->flush();
             }
         } else {
             //sinon on joue la carte
             $em = $this->getDoctrine()->getManager();
             $carteAJouer->setCarteSituation('plateauJ1');
+            $j1jouer->setJ1cartejouer('1');
             $em->flush();
         }
         //TODO::faire une verification de fin de parite, et rediriger vers une fonction fin de partie
@@ -211,6 +212,7 @@ class PartieController extends Controller
     {
         //recup de la carte à jouer, et de sa catégorie
         $carteAJouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $j2jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
         $categorie = $carteAJouer->getModeles()->getCocktailCategorie();
         $valeur = $carteAJouer->getModeles()->getCocktailValeur();
         //recup des cartes sur le plateau
@@ -234,12 +236,14 @@ class PartieController extends Controller
                 //on joue la carte
                 $em = $this->getDoctrine()->getManager();
                 $carteAJouer->setCarteSituation('plateauJ2');
+                $j2jouer->setJ2cartejouer('1');
                 $em->flush();
             }
         } else {
             //sinon on joue la carte
             $em = $this->getDoctrine()->getManager();
             $carteAJouer->setCarteSituation('plateauJ2');
+            $j2jouer->setJ2cartejouer('1');
             $em->flush();
         }
         //TODO::faire une verification de fin de parite, et rediriger vers une fonction fin de partie
