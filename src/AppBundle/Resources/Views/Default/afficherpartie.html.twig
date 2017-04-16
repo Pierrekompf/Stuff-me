@@ -163,7 +163,7 @@
 
 
                 <ul>
-                    <h3>Vodka</h3>
+                    <h3>Vodka :</h3>
 
                     <h4>Plateau de {{ parties[0].joueur1 }}</h4>
 
@@ -242,8 +242,12 @@
 
     <div>
         <h2>Défausse</h2>
+
         <ul>
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'defausse' %}
+            <h3>Bière :</h3>
+
+
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'defausse' %}
 
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
@@ -256,8 +260,109 @@
 
                     {% endif %}
                 </li>
+
             {% endfor %}
         </ul>
+
+
+
+
+
+        <ul>
+            <h3>Rhum :</h3>
+
+
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'defausse' %}
+
+                <li>
+                    {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
+
+                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="">Récuperer</a>
+
+                    {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
+                        <a href="">Récuperer</a>
+
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+        </ul>
+
+
+
+
+
+        <ul>
+            <h3>Tequila :</h3>
+
+
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'defausse' %}
+
+                <li>
+                    {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
+
+                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="">Récuperer</a>
+
+                    {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
+                        <a href="">Récuperer</a>
+
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+        </ul>
+
+
+
+        <ul>
+            <h3>Vodka :</h3>
+
+
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'defausse' %}
+
+                <li>
+                    {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
+
+                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="">Récuperer</a>
+
+                    {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
+                        <a href="">Récuperer</a>
+
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+        </ul>
+
+
+
+
+        <ul>
+            <h3>Cognac :</h3>
+
+
+            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'defausse' %}
+
+                <li>
+                    {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
+
+                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="">Récuperer</a>
+
+                    {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
+                        <a href="">Récuperer</a>
+
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+        </ul>
+
+
+
     </div>
 
 

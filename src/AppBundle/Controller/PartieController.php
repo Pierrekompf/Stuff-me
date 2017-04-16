@@ -182,9 +182,9 @@ class PartieController extends Controller
 
     /**
      * @param stuff_me_partie $partieid stuff_me_cartes $carteid
-     * @Route("/recup/{partieid/{carteid}", name="recupCarte")
+     * @Route("/recupold/{partieid/{carteid}", name="recupCarteold")
      */
-    public function recupAction($partieid, $carteid)
+    public function recupoldAction($partieid, $carteid)
     {
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
         $cartesrecup = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
@@ -198,6 +198,8 @@ class PartieController extends Controller
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
+
+
 
     /**
      * @param stuff_me_partie $partieid
