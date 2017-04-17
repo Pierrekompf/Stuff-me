@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PartieController extends Controller
 {
-    //Afficher les parties
     /**
      * @Route ("/parties/", name="mesparties")
      */
@@ -34,9 +33,8 @@ class PartieController extends Controller
         return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
     }
 
-    //Gestion de création de partie
     /**
-     * @Route("/parties/add", name="jouer")
+     * @Route("/parties/add", name="creation")
      */
     public function addPartieAction()
     {
@@ -45,7 +43,6 @@ class PartieController extends Controller
         return $this->render("@App/Default/addpartie.html.twig", ['user' => $user, 'joueurs' => $joueurs]);
     }
 
-    //Creation de la partie
     /**
      * @param stuff_me_user $id
      * @Route("/inviter/{joueur}", name="creer_partie")
@@ -72,12 +69,12 @@ class PartieController extends Controller
             $joueur->setLoose(0);
             $joueur->setTotaleScore(0);
         }
-        //Distribution des cartes
+        //distribution
         $em = $this->getDoctrine()->getManager();
         $em->persist($partie);
         $em->flush();
         $cocktails = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
-        //mélange des cartes
+        //mélange
         shuffle($cocktails);
         for($i = 0; $i<8; $i++)
         {
@@ -108,18 +105,19 @@ class PartieController extends Controller
     }
 
     function calculerscore($partieid){
-        //$partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
+        //calcule du score
         //for ($i=0; $i<5; $i++){
         //}
         //$partie->setPartieJoueur1Score($score);
-        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
-        $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
+        //passage du tour apres
         if ($partie->getPartieTour() == $partie->getJoueur1()) {
             $partie->setPartieTour($partie->getJoueur2());
         } else {
             $partie->setPartieTour($partie->getJoueur1());
         }
-
+        //remise a zéro des cartes jouer
         $jouer->setJ1cartejouer('0');
         $jouer->setJ2cartejouer('0');
     }
@@ -160,19 +158,17 @@ class PartieController extends Controller
      */
     public function defausseAction($partieid, $carteid)
     {
-        //on recupere la partie, la carte à défausser, sa categorie et les cartes deja dans la défausse
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
-        $carteADefausser = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
-        $carteDansDefausse = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausse', 'parties' => $partieid]);
+        $cartedefausser = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $cartedefausse = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausse', 'parties' => $partieid]);
         $em = $this->getDoctrine()->getManager();
-        //si la défausse n'est pas vide
-        if (!empty($carteDansDefausse)) {
-            $ordre = count($carteDansDefausse) + 1;
-            $carteADefausser->setCarteSituation('defausse');
-            $carteADefausser->setCarteOrdre($ordre);
+        if (!empty($cartedefausse)) {
+            $ordre = count($cartedefausse) + 1;
+            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteOrdre($ordre);
         } else {
-            $carteADefausser->setCarteSituation('defausse');
-            $carteADefausser->setCarteOrdre(1);
+            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteOrdre(1);
         }
         $partie->setJ1cartejouer('1');
         $partie->setJ2cartejouer('1');
@@ -182,9 +178,9 @@ class PartieController extends Controller
 
     /**
      * @param stuff_me_partie $partieid stuff_me_cartes $carteid
-     * @Route("/recupold/{partieid/{carteid}", name="recupCarteold")
+     * @Route("/recup/{partieid}/{carteid}", name="recup")
      */
-    public function recupoldAction($partieid, $carteid)
+    public function recupAction($partieid, $carteid)
     {
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
         $cartesrecup = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
@@ -198,8 +194,6 @@ class PartieController extends Controller
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
-
-
 
     /**
      * @param stuff_me_partie $partieid
@@ -225,72 +219,60 @@ class PartieController extends Controller
      **/
     public function jouerCarteAction($partieid, $carteid)
     {
-        //recup de la carte à jouer, et de sa catégorie
-        $carteAJouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $cartejouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
         $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
-        $categorie = $carteAJouer->getModeles()->getCocktailCategorie();
-        $valeur = $carteAJouer->getModeles()->getCocktailValeur();
-        //recup des cartes sur le plateau
+        $categorie = $cartejouer->getModeles()->getCocktailCategorie();
+        $valeur = $cartejouer->getModeles()->getCocktailValeur();
         if ($jouer->getPartieTour() == $jouer->getJoueur1()){
-        $cartesSurPlateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ1', 'parties' => $partieid]);
-        //si il y a des cartes sur le plateau
-        if (!empty($cartesSurPlateau)) {
-            $test = 0;
-            $aEteJouee = 0;
-            foreach ($cartesSurPlateau as $val) {
-                //si les catégories sont les mêmes et que la valeur de la carte jouée est supérieure à celle du plateau
+        $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ1', 'parties' => $partieid]);
+        if (!empty($cartesplateau)) {
+            $remplis = 0;
+            $etejouer = 0;
+            foreach ($cartesplateau as $val) {
                 if ($val->getModeles()->getCocktailCategorie() == $categorie) {
                     if ($val->getModeles()->getCocktailValeur() < $valeur) {
-                        $aEteJouee = 1;
+                        $etejouer = 1;
                     }
                 } else {
-                    //on incrémente si les catégories ne sont pas les mêmes
-                    $test++;
+                    $remplis++;
                 }
             }
-            if ($test == count($cartesSurPlateau) || $aEteJouee == 1) {
-                //on joue la carte
+            if ($remplis == count($cartesplateau) || $etejouer == 1) {
                 $em = $this->getDoctrine()->getManager();
-                $carteAJouer->setCarteSituation('plateauJ1');
+                $cartejouer->setCarteSituation('plateauJ1');
                 $jouer->setJ1cartejouer('1');
                 $em->flush();
             }
         } else {
-            //sinon on joue la carte
             $em = $this->getDoctrine()->getManager();
-            $carteAJouer->setCarteSituation('plateauJ1');
+            $cartejouer->setCarteSituation('plateauJ1');
             $jouer->setJ1cartejouer('1');
             $em->flush();
         }
 
         } elseif ($jouer->getPartieTour() == $jouer->getJoueur2()){
-            $cartesSurPlateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ2', 'parties' => $partieid]);
-            //si il y a des cartes sur le plateau
-            if (!empty($cartesSurPlateau)) {
-                $test = 0;
-                $aEteJouee = 0;
-                foreach ($cartesSurPlateau as $val) {
-                    //si les catégories sont les mêmes et que la valeur de la carte jouée est supérieure à celle du plateau
+            $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ2', 'parties' => $partieid]);
+            if (!empty($cartesplateau)) {
+                $remplis = 0;
+                $etejouer = 0;
+                foreach ($cartesplateau as $val) {
                     if ($val->getModeles()->getCocktailCategorie() == $categorie) {
                         if ($val->getModeles()->getCocktailValeur() < $valeur) {
-                            $aEteJouee = 1;
+                            $etejouer = 1;
                         }
                     } else {
-                        //on incrémente si les catégories ne sont pas les mêmes
-                        $test++;
+                        $remplis++;
                     }
                 }
-                if ($test == count($cartesSurPlateau) || $aEteJouee == 1) {
-                    //on joue la carte
+                if ($remplis == count($cartesplateau) || $etejouer == 1) {
                     $em = $this->getDoctrine()->getManager();
-                    $carteAJouer->setCarteSituation('plateauJ2');
+                    $cartejouer->setCarteSituation('plateauJ2');
                     $jouer->setJ2cartejouer('1');
                     $em->flush();
                 }
             } else {
-                //sinon on joue la carte
                 $em = $this->getDoctrine()->getManager();
-                $carteAJouer->setCarteSituation('plateauJ2');
+                $cartejouer->setCarteSituation('plateauJ2');
                 $jouer->setJ2cartejouer('1');
                 $em->flush();
             }

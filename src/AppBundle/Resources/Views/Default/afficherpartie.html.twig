@@ -5,7 +5,12 @@
         <div class="zbackground"></div>
     </div>
 
-    <h1>Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}</h1>
+    <h1>
+        Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
+        {#{% if parties[0].gagnant  != null %}#}
+            {#Gagnant : partie[0].gagnant#}
+        {#{% endif %}#}
+    </h1>
     <h3>Score :</h3>
     <h4>Joueur 1 : {{ parties[0].partiejoueur1score }}</h4>
     <h4>Joueur 2 : {{ parties[0].partiejoueur2score }}</h4>
@@ -45,9 +50,9 @@
     <div>
         <h2>Cartes de {{ parties[0].joueur2 }}</h2>
         <ul>
-            {% set t = 0 %}
+            {% set j = 0 %}
             {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ2' %}
-                {% set t = t + 1 %}
+                {% set j = j + 1 %}
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} : {{ carte.modeles.cocktailValeur }}
                     {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 and parties[0].j2cartejouer == '0'%}
@@ -226,7 +231,7 @@
             {% endfor %}
         </ul>
 
-        {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+        {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
             <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">piocher</a>
 
             {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
@@ -252,11 +257,11 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
 
-                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="">Récuperer</a>
+                    {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="">Récuperer</a>
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% endif %}
                 </li>
@@ -277,11 +282,11 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
 
-                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="">Récuperer</a>
+                    {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="">Récuperer</a>
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% endif %}
                 </li>
@@ -302,11 +307,11 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
 
-                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="">Récuperer</a>
+                    {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="">Récuperer</a>
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% endif %}
                 </li>
@@ -325,11 +330,11 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
 
-                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="">Récuperer</a>
+                    {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="">Récuperer</a>
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% endif %}
                 </li>
@@ -349,11 +354,11 @@
                 <li>
                     {{ carte.modeles.cocktailImage }} : {{ carte.modeles.cocktailCategorie }} :  {{ carte.modeles.cocktailValeur }} - {{ carte.carteOrdre }}
 
-                    {% if t < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
-                        <a href="">Récuperer</a>
+                    {% if j < 8 and parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 %}
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% elseif i < 8 and parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 %}
-                        <a href="">Récuperer</a>
+                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
 
                     {% endif %}
                 </li>
