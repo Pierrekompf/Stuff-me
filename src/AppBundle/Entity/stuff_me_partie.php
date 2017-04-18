@@ -35,6 +35,19 @@ class stuff_me_partie
      */
     private $partieJoueur2Score;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="j1_carte_jouer", type="boolean", nullable=true)
+     */
+    private $j1cartejouer;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="j2_carte_jouer", type="boolean", nullable=true)
+     */
+    private $j2cartejouer;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1", fetch="EAGER")
@@ -180,5 +193,53 @@ class stuff_me_partie
     public function getPartieTour()
     {
         return $this->partieTour;
+    }
+
+    /**
+     * Set j1cartejouer
+     *
+     * @param boolean $j1cartejouer
+     *
+     * @return stuff_me_partie
+     */
+    public function setJ1cartejouer($j1cartejouer)
+    {
+        $this->j1cartejouer = $j1cartejouer;
+
+        return $this;
+    }
+
+    /**
+     * Get j1cartejouer
+     *
+     * @return boolean
+     */
+    public function getJ1cartejouer()
+    {
+        return $this->j1cartejouer;
+    }
+
+    /**
+     * Set j2cartejouer
+     *
+     * @param boolean $j2cartejouer
+     *
+     * @return stuff_me_partie
+     */
+    public function setJ2cartejouer($j2cartejouer)
+    {
+        $this->j2cartejouer = $j2cartejouer;
+
+        return $this;
+    }
+
+    /**
+     * Get j2cartejouer
+     *
+     * @return boolean
+     */
+    public function getJ2cartejouer()
+    {
+        return $this->j2cartejouer;
     }
 }

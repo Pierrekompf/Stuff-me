@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PartieController extends Controller
 {
-    //Afficher les parties
     /**
      * @Route ("/parties/", name="mesparties")
      */
@@ -34,9 +33,8 @@ class PartieController extends Controller
         return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
     }
 
-    //Gestion de création de partie
     /**
-     * @Route("/parties/add", name="jouer")
+     * @Route("/parties/add", name="creation")
      */
     public function addPartieAction()
     {
@@ -45,7 +43,6 @@ class PartieController extends Controller
         return $this->render("@App/Default/addpartie.html.twig", ['user' => $user, 'joueurs' => $joueurs]);
     }
 
-    //Creation de la partie
     /**
      * @param stuff_me_user $id
      * @Route("/inviter/{joueur}", name="creer_partie")
@@ -57,8 +54,10 @@ class PartieController extends Controller
         $partie->setJoueur1($user);
         $partie->setJoueur2($joueur);
         $partie->setPartieTour($user);
-        $partie->setPartieJoueur1Score(0);
-        $partie->setPartieJoueur2Score(0);
+        $partie->setPartieJoueur1Score(-100);
+        $partie->setPartieJoueur2Score(-100);
+        $partie->setJ1cartejouer(0);
+        $partie->setJ2cartejouer(0);
         //Si le joueur n'as jamais jouer, set win et loose à 0
         if (is_null($user->getWin())) {
             $user->setWin(0);
@@ -70,12 +69,12 @@ class PartieController extends Controller
             $joueur->setLoose(0);
             $joueur->setTotaleScore(0);
         }
-        //Distribution des cartes
+        //distribution
         $em = $this->getDoctrine()->getManager();
         $em->persist($partie);
         $em->flush();
         $cocktails = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
-        //mélange des cartes
+        //mélange
         shuffle($cocktails);
         for($i = 0; $i<8; $i++)
         {
@@ -105,27 +104,93 @@ class PartieController extends Controller
         return $this->render('@App/Default/partiecreer.html.twig', ['partie' => $partie, 'user' => $user]);
     }
 
+    function calculerscore($partieid){
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
+        //calcule du score
+        //for ($i=0; $i<5; $i++){
+        //}
+        //$partie->setPartieJoueur1Score($score);
+        //passage du tour apres
+        if ($partie->getPartieTour() == $partie->getJoueur1()) {
+            $partie->setPartieTour($partie->getJoueur2());
+        } else {
+            $partie->setPartieTour($partie->getJoueur1());
+        }
+        //remise a zéro des cartes jouer
+        $jouer->setJ1cartejouer('0');
+        $jouer->setJ2cartejouer('0');
+    }
+
+    function finpartie($partieid){
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
+        $nbcartes = count($cartesPioche);
+        if ( $nbcartes = 0 ){
+
+        }
+    }
+
+
     /**
      * @param stuff_me_partie $partieid
-     * @Route("/piocherj1/{partieid}", name="piocherj1")
+     * @Route("/piocher/{partieid}", name="piocher")
      */
-    public function piocherj1Action($partieid)
+    public function piocherAction($partieid)
     {
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
         $em = $this->getDoctrine()->getManager();
-        $cartesPioche->setCarteSituation('mainJ1');
+        if ($partie->getPartieTour() == $partie->getJoueur1()) {
+            $cartesPioche->setCarteSituation('mainJ1');
+        } else {
+            $cartesPioche->setCarteSituation('mainJ2');
+        }
+        $score= $this->calculerscore($partieid);
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
+
     /**
-     * @param stuff_me_partie $partieid
-     * @Route("/piocherj2/{partieid}", name="piocherj2")
+     * @param stuff_me_partie $partieid stuff_me_cartes $carteid
+     * @Route("/defausse/{partieid}/{carteid}", name="defausserCarte")
      */
-    public function piocherj2Action($partieid)
+    public function defausseAction($partieid, $carteid)
     {
-        $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $cartedefausser = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $cartedefausse = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausse', 'parties' => $partieid]);
         $em = $this->getDoctrine()->getManager();
-        $cartesPioche->setCarteSituation('mainJ2');
+        if (!empty($cartedefausse)) {
+            $ordre = count($cartedefausse) + 1;
+            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteOrdre($ordre);
+        } else {
+            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteOrdre(1);
+        }
+        $partie->setJ1cartejouer('1');
+        $partie->setJ2cartejouer('1');
+        $em->flush();
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+    }
+
+    /**
+     * @param stuff_me_partie $partieid stuff_me_cartes $carteid
+     * @Route("/recup/{partieid}/{carteid}", name="recup")
+     */
+    public function recupAction($partieid, $carteid)
+    {
+        $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $cartesrecup = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $em = $this->getDoctrine()->getManager();
+        if ($partie->getPartieTour() == $partie->getJoueur1()) {
+            $cartesrecup->setCarteSituation('mainJ1');
+        } else {
+            $cartesrecup->setCarteSituation('mainJ2');
+        }
+        $score= $this->calculerscore($partieid);
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
@@ -147,5 +212,74 @@ class PartieController extends Controller
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
+
+    /**
+     * @param stuff_me_partie $partieid stuff_me_cartes $carteid
+     * @Route("jouer/{partieid}/{carteid}", name="jouer")
+     **/
+    public function jouerCarteAction($partieid, $carteid)
+    {
+        $cartejouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
+        $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
+        $categorie = $cartejouer->getModeles()->getCocktailCategorie();
+        $valeur = $cartejouer->getModeles()->getCocktailValeur();
+        if ($jouer->getPartieTour() == $jouer->getJoueur1()){
+        $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ1', 'parties' => $partieid]);
+        if (!empty($cartesplateau)) {
+            $remplis = 0;
+            $etejouer = 0;
+            foreach ($cartesplateau as $val) {
+                if ($val->getModeles()->getCocktailCategorie() == $categorie) {
+                    if ($val->getModeles()->getCocktailValeur() < $valeur) {
+                        $etejouer = 1;
+                    }
+                } else {
+                    $remplis++;
+                }
+            }
+            if ($remplis == count($cartesplateau) || $etejouer == 1) {
+                $em = $this->getDoctrine()->getManager();
+                $cartejouer->setCarteSituation('plateauJ1');
+                $jouer->setJ1cartejouer('1');
+                $em->flush();
+            }
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $cartejouer->setCarteSituation('plateauJ1');
+            $jouer->setJ1cartejouer('1');
+            $em->flush();
+        }
+
+        } elseif ($jouer->getPartieTour() == $jouer->getJoueur2()){
+            $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ2', 'parties' => $partieid]);
+            if (!empty($cartesplateau)) {
+                $remplis = 0;
+                $etejouer = 0;
+                foreach ($cartesplateau as $val) {
+                    if ($val->getModeles()->getCocktailCategorie() == $categorie) {
+                        if ($val->getModeles()->getCocktailValeur() < $valeur) {
+                            $etejouer = 1;
+                        }
+                    } else {
+                        $remplis++;
+                    }
+                }
+                if ($remplis == count($cartesplateau) || $etejouer == 1) {
+                    $em = $this->getDoctrine()->getManager();
+                    $cartejouer->setCarteSituation('plateauJ2');
+                    $jouer->setJ2cartejouer('1');
+                    $em->flush();
+                }
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $cartejouer->setCarteSituation('plateauJ2');
+                $jouer->setJ2cartejouer('1');
+                $em->flush();
+            }
+        }
+        //TODO::faire une verification de fin de parite, et rediriger vers une fonction fin de partie
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+    }
+
 
 }

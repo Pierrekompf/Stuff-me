@@ -81,6 +81,9 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+    profile:
+        form:
+            type: AppBundle\Form\ProfileType
 
 
 easy_admin:
