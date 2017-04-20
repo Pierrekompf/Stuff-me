@@ -124,11 +124,36 @@ class PartieController extends Controller
 
     function finpartie($partieid){
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
+        $joueur2 = $partie->getJoueur2();
+        $joueur1 = $partie->getJoueur1();
+        $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['parties' => $partieid]);
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
         $nbcartes = count($cartesPioche);
-        if ( $nbcartes = 0 ){
-
+        $em = $this->getDoctrine()->getManager();
+        if ( $nbcartes == 1 ){
+            if ($partie->getPartieJoueur1Score() > $partie->getPartieJoueur2Score()){
+                $partie->setGagnant($partie->getJoueur1());
+                $joueur1->setTotaleScore( $joueur1->getTotaleScore() + 10);
+                if ($joueur2->getTotaleScore() >= 5){
+                    $joueur2->setTotaleScore( $joueur2->getTotaleScore() - 5);
+                }
+            } elseif ($partie->getPartieJoueur1Score() < $partie->getPartieJoueur2Score()) {
+                $partie->setGagnant($partie->getJoueur2());
+                if ($joueur1->getTotaleScore() >= 5) {
+                    $joueur1->setTotaleScore($joueur1->getTotaleScore() - 5);
+                }
+                $joueur2->setTotaleScore( $joueur2->getTotaleScore() + 10);
+            } else {
+                $partie->setGagnant('Egalité');
+                $joueur1->setTotaleScore($joueur1->getTotaleScore() + 5);
+                $joueur2->setTotaleScore($joueur2->getTotaleScore() + 5);
+            }
+            foreach ($cartes as $carte) {
+                $em->remove($carte);
+                $em->flush();
+            }
         }
+
     }
 
 
@@ -148,6 +173,7 @@ class PartieController extends Controller
             $cartesPioche->setCarteSituation('mainJ2');
         }
         $score= $this->calculerscore($partieid);
+        $finpartie = $this->finpartie($partieid);
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
@@ -277,7 +303,6 @@ class PartieController extends Controller
                 $em->flush();
             }
         }
-        //TODO::faire une verification de fin de parite, et rediriger vers une fonction fin de partie
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
 

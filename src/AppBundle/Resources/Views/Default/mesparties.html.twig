@@ -22,7 +22,13 @@
                                 {% endif %}
 
 
-                            </a> - tour de : {{ partie.partieTour }}</li>
+                            </a>
+                            {% if partie.gagnant  == null %}
+                                - tour de : {{ partie.partieTour }}
+                            {% else %}
+                                - Gagnant : {{ partie.gagnant }}
+                            {% endif %}
+                        </li>
                         {% set i = i + 1 %}
                     {% endif %}
                 {% endfor %}

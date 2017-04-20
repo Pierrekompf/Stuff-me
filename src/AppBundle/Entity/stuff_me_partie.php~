@@ -50,6 +50,12 @@ class stuff_me_partie
     private $j2cartejouer;
 
     /**
+     * @var int
+     * @ORM\Column(name="partie_gagnant", type="bigint", nullable=true)
+     */
+    private $gagnant;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1", fetch="EAGER")
      */
     private $joueur1;

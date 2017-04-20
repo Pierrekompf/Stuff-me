@@ -7,9 +7,10 @@
 
     <h1>
         Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
-        {#{% if parties[0].gagnant  != null %}#}
-            {#Gagnant : partie[0].gagnant#}
-        {#{% endif %}#}
+        <br>
+        {% if parties[0].gagnant  != null %}
+            Gagnant : {{ parties[0].gagnant }}
+        {% endif %}
     </h1>
     <h3>Score :</h3>
     <h4>Joueur 1 : {{ parties[0].partiejoueur1score }}</h4>
