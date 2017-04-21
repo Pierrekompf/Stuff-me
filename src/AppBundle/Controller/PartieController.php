@@ -29,8 +29,9 @@ class PartieController extends Controller
     {
         $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findAll();
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findBy(['id' => $id]);
+        $nbpioche = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche' , 'parties' => $id]));
         $user = $this->getUser();
-        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user]);
+        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user , 'nbpioche' => $nbpioche]);
     }
 
     /**
