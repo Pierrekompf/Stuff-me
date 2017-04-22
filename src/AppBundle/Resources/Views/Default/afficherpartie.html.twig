@@ -228,7 +228,7 @@
 
     <div>
         <h2>Pioche : {{ nbpioche }}</h2>
-        
+
 
         {% if user.username == parties[0].joueur2 and j < 8 and parties[0].partietour == parties[0].joueur2  %}
             <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">piocher</a>

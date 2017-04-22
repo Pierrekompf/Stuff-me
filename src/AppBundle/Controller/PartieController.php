@@ -55,8 +55,8 @@ class PartieController extends Controller
         $partie->setJoueur1($user);
         $partie->setJoueur2($joueur);
         $partie->setPartieTour($user);
-        $partie->setPartieJoueur1Score(-100);
-        $partie->setPartieJoueur2Score(-100);
+        $partie->setPartieJoueur1Score(0);
+        $partie->setPartieJoueur2Score(0);
         $partie->setJ1cartejouer(0);
         $partie->setJ2cartejouer(0);
         //Si le joueur n'as jamais jouer, set win et loose à 0
@@ -105,14 +105,10 @@ class PartieController extends Controller
         return $this->render('@App/Default/partiecreer.html.twig', ['partie' => $partie, 'user' => $user]);
     }
 
-    function calculerscore($partieid){
+    function changetour($partieid){
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
         $jouer = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findOneBy(['id' => $partieid]);
-        //calcule du score
-        //for ($i=0; $i<5; $i++){
-        //}
-        //$partie->setPartieJoueur1Score($score);
-        //passage du tour apres
+        //changement de tour
         if ($partie->getPartieTour() == $partie->getJoueur1()) {
             $partie->setPartieTour($partie->getJoueur2());
         } else {
@@ -173,7 +169,7 @@ class PartieController extends Controller
         } else {
             $cartesPioche->setCarteSituation('mainJ2');
         }
-        $score= $this->calculerscore($partieid);
+        $score= $this->changetour($partieid);
         $finpartie = $this->finpartie($partieid);
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
@@ -217,7 +213,7 @@ class PartieController extends Controller
         } else {
             $cartesrecup->setCarteSituation('mainJ2');
         }
-        $score= $this->calculerscore($partieid);
+        $score= $this->changetour($partieid);
         $em->flush();
         return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
     }
@@ -252,12 +248,14 @@ class PartieController extends Controller
         $valeur = $cartejouer->getModeles()->getCocktailValeur();
         if ($jouer->getPartieTour() == $jouer->getJoueur1()){
         $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ1', 'parties' => $partieid]);
+        $score = $jouer->getPartieJoueur1Score();
+
         if (!empty($cartesplateau)) {
             $remplis = 0;
             $etejouer = 0;
             foreach ($cartesplateau as $val) {
                 if ($val->getModeles()->getCocktailCategorie() == $categorie) {
-                    if ($val->getModeles()->getCocktailValeur() < $valeur) {
+                    if ($val->getModeles()->getCocktailValeur() <= $valeur) {
                         $etejouer = 1;
                     }
                 } else {
@@ -268,23 +266,59 @@ class PartieController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $cartejouer->setCarteSituation('plateauJ1');
                 $jouer->setJ1cartejouer('1');
+
+                if ($cartejouer->getModeles()->getCocktailExtra()==1) {
+                    //on créer un multiplicateur egal à 1
+                    $multiplicateur = 2;
+                    //on l'incremente si il y a deja des extra de la même catégorie sur la table
+                    foreach ($cartesplateau as $val) {
+                        if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
+                            $multiplicateur++;
+                        }
+                    }
+                    $score = -20 * $multiplicateur;
+                } else {
+                    //on créer un multiplicateur egal à 1
+                    $multiplicateur = 1;
+                    //on l'incremente si il y a deja des extra de la même catégorie sur la table
+                    foreach ($cartesplateau as $val) {
+                        if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
+                            $multiplicateur++;
+                        }
+                    }
+                    $score = $score + $cartejouer->getModeles()->getCocktailValeur()*$multiplicateur;
+                }
+
+                $jouer->setPartieJoueur1Score($score);
                 $em->flush();
             }
         } else {
             $em = $this->getDoctrine()->getManager();
             $cartejouer->setCarteSituation('plateauJ1');
             $jouer->setJ1cartejouer('1');
+            if ($cartejouer->getModeles()->getCocktailExtra()==1) {
+                //on créer un multiplicateur egal à 1
+                $multiplicateur = 2;
+            } else {
+                //on créer un multiplicateur egal à 1
+                $multiplicateur = 1;
+            }
+            $score += (-20 + $cartejouer->getModeles()->getCocktailValeur()) * $multiplicateur;
+            $jouer->setPartieJoueur1Score($score);
             $em->flush();
         }
 
+
+
         } elseif ($jouer->getPartieTour() == $jouer->getJoueur2()){
             $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ2', 'parties' => $partieid]);
+            $score = $jouer->getPartieJoueur2Score();
             if (!empty($cartesplateau)) {
                 $remplis = 0;
                 $etejouer = 0;
                 foreach ($cartesplateau as $val) {
                     if ($val->getModeles()->getCocktailCategorie() == $categorie) {
-                        if ($val->getModeles()->getCocktailValeur() < $valeur) {
+                        if ($val->getModeles()->getCocktailValeur() <= $valeur) {
                             $etejouer = 1;
                         }
                     } else {
@@ -295,12 +329,46 @@ class PartieController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $cartejouer->setCarteSituation('plateauJ2');
                     $jouer->setJ2cartejouer('1');
+
+                         if ($cartejouer->getModeles()->getCocktailExtra()==1) {
+                        //on créer un multiplicateur egal à 1
+                        $multiplicateur = 2;
+                        //on l'incremente si il y a deja des extra de la même catégorie sur la table
+                        foreach ($cartesplateau as $val) {
+                            if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
+                                $multiplicateur++;
+                            }
+                        }
+                        $score = -20 * $multiplicateur;
+                    } else {
+                        //on créer un multiplicateur egal à 1
+                        $multiplicateur = 1;
+                        //on l'incremente si il y a deja des extra de la même catégorie sur la table
+                        foreach ($cartesplateau as $val) {
+                            if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
+                                $multiplicateur++;
+                            }
+                        }
+                        $score = $score + $cartejouer->getModeles()->getCocktailValeur() * $multiplicateur;
+                    }
+
+                    $jouer->setPartieJoueur2Score($score);
                     $em->flush();
                 }
             } else {
                 $em = $this->getDoctrine()->getManager();
                 $cartejouer->setCarteSituation('plateauJ2');
                 $jouer->setJ2cartejouer('1');
+
+                if ($cartejouer->getModeles()->getCocktailExtra()==1) {
+                    //on créer un multiplicateur egal à 1
+                    $multiplicateur = 2;
+                } else {
+                    $multiplicateur = 1;
+                }
+                $score += (-20 + $cartejouer->getModeles()->getCocktailValeur()) * $multiplicateur;
+                $jouer->setPartieJoueur2Score($score);
+
                 $em->flush();
             }
         }
