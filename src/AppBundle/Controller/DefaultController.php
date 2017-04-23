@@ -8,43 +8,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+
     /**
      * @Route("/", name="index")
      */
 
     public function indexAction() {
-        return $this->render("AppBundle:Default:index.html.twig");
+        $classement = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
+            array('nationalite' => 'FR'),
+            array('totale_score' => 'desc'),
+            5
+        );
+
+        $classementinter = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
+            array (),
+            array('totale_score' => 'desc'),
+            5
+        );
+
+        return $this->render("AppBundle:Default:index.html.twig", ['classement'=>$classement , 'classementinter'=>$classementinter]);
     }
 
-    /**
-     * @Route("/en", name="index_en")
-     */
-
-    public function indexenAction() {
-        return $this->render("AppBundle:Default:index_en.html.twig");
-    }
-
-    /**
-     * @Route("/admintest", name="admin")
-     */
-
-    public function adminAction(){
-        return $this->render("AppBundle:Default:admin.html.twig");
-    }
-
-    /**
-     * @Route("/admin_user", name="admin_user")
-     */
-
-    public function admin_userAction(){
-        return $this->render("AppBundle:Default:admin_user.html.twig");
-    }
-
-    /**
-     * @Route("/admin_jeu", name="admin_jeu")
-     */
-
-    public function admin_jeuAction(){
-        return $this->render("AppBundle:Default:admin_jeu.html.twig");
-    }
 }

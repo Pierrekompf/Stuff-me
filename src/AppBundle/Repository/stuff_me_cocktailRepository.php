@@ -10,4 +10,5 @@ namespace AppBundle\Repository;
  */
 class stuff_me_cocktailRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

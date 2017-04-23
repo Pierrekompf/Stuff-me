@@ -50,8 +50,8 @@ class stuff_me_partie
     private $j2cartejouer;
 
     /**
-     * @var string
-     * @ORM\Column(name="partie_gagnant", type="string", nullable=true)
+     * @var int
+     * @ORM\Column(name="partie_gagnant", type="bigint", nullable=true)
      */
     private $gagnant;
 
@@ -247,29 +247,5 @@ class stuff_me_partie
     public function getJ2cartejouer()
     {
         return $this->j2cartejouer;
-    }
-
-    /**
-     * Set gagnant
-     *
-     * @param integer $gagnant
-     *
-     * @return stuff_me_partie
-     */
-    public function setGagnant($gagnant)
-    {
-        $this->gagnant = $gagnant;
-
-        return $this;
-    }
-
-    /**
-     * Get gagnant
-     *
-     * @return integer
-     */
-    public function getGagnant()
-    {
-        return $this->gagnant;
     }
 }

@@ -1,0 +1,13 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show" style="margin-left: 33%;">
+    <img src="{{ asset('assets/img/logo.png') }}"/>
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>Nationalité : {{ user.nationalite }}</p>
+    <p>Win : {{ user.win }}</p>
+    <p>Loose : {{ user.loose }}</p>
+    <p>Score totale : {{ user.totalescore }}</p>
+    <p>Vous pouvez éditer votre profil ici : <a href="{{ path('fos_user_profile_edit') }}">Editer</a></p>
+    <p>Vous pouvez voir vos parties en cours ici : <a href="{{ path('mesparties') }}">Mes Parties</a></p>
+</div>
