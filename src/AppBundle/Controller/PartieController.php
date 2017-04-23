@@ -273,9 +273,7 @@ class PartieController extends Controller
                 $jouer->setJ1cartejouer('1');
 
                 if ($cartejouer->getModeles()->getCocktailExtra()==1) {
-                    //on créer un multiplicateur egal à 1
                     $multiplicateur = 2;
-                    //on l'incremente si il y a deja des extra de la même catégorie sur la table
                     foreach ($cartesplateau as $val) {
                         if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
                             $multiplicateur++;
@@ -283,9 +281,7 @@ class PartieController extends Controller
                     }
                     $score = -20 * $multiplicateur;
                 } else {
-                    //on créer un multiplicateur egal à 1
                     $multiplicateur = 1;
-                    //on l'incremente si il y a deja des extra de la même catégorie sur la table
                     foreach ($cartesplateau as $val) {
                         if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
                             $multiplicateur++;
@@ -302,10 +298,8 @@ class PartieController extends Controller
             $cartejouer->setCarteSituation('plateauJ1');
             $jouer->setJ1cartejouer('1');
             if ($cartejouer->getModeles()->getCocktailExtra()==1) {
-                //on créer un multiplicateur egal à 1
                 $multiplicateur = 2;
             } else {
-                //on créer un multiplicateur egal à 1
                 $multiplicateur = 1;
             }
             $score += (-20 + $cartejouer->getModeles()->getCocktailValeur()) * $multiplicateur;
@@ -336,9 +330,7 @@ class PartieController extends Controller
                     $jouer->setJ2cartejouer('1');
 
                          if ($cartejouer->getModeles()->getCocktailExtra()==1) {
-                        //on créer un multiplicateur egal à 1
                         $multiplicateur = 2;
-                        //on l'incremente si il y a deja des extra de la même catégorie sur la table
                         foreach ($cartesplateau as $val) {
                             if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
                                 $multiplicateur++;
@@ -346,9 +338,7 @@ class PartieController extends Controller
                         }
                         $score = -20 * $multiplicateur;
                     } else {
-                        //on créer un multiplicateur egal à 1
                         $multiplicateur = 1;
-                        //on l'incremente si il y a deja des extra de la même catégorie sur la table
                         foreach ($cartesplateau as $val) {
                             if ($val->getModeles()->getCocktailCategorie() == $categorie && $val->getModeles()->getCocktailExtra() == 1) {
                                 $multiplicateur++;
@@ -366,7 +356,6 @@ class PartieController extends Controller
                 $jouer->setJ2cartejouer('1');
 
                 if ($cartejouer->getModeles()->getCocktailExtra()==1) {
-                    //on créer un multiplicateur egal à 1
                     $multiplicateur = 2;
                 } else {
                     $multiplicateur = 1;
