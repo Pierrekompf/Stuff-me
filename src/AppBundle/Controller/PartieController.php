@@ -30,8 +30,13 @@ class PartieController extends Controller
         $cartes = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findAll();
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->findBy(['id' => $id]);
         $nbpioche = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche' , 'parties' => $id]));
+        $cartemaxbiere = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defaussebiere', 'parties' => $id]));
+        $cartemaxcognac = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defaussecognac', 'parties' => $id]));
+        $cartemaxtequila = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defaussetequila', 'parties' => $id]));
+        $cartemaxvodka = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defaussevodka', 'parties' => $id]));
+        $cartemaxrhum = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausserhum', 'parties' => $id]));
         $user = $this->getUser();
-        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user , 'nbpioche' => $nbpioche]);
+        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user , 'nbpioche' => $nbpioche, 'cartemaxbiere' => $cartemaxbiere, 'cartemaxvodka' => $cartemaxvodka, 'cartemaxtequila' => $cartemaxtequila, 'cartemaxrhum' => $cartemaxrhum, 'cartemaxcognac' => $cartemaxcognac]);
     }
 
     /**
@@ -183,20 +188,20 @@ class PartieController extends Controller
     {
         $partie = $this->getDoctrine()->getRepository('AppBundle:stuff_me_partie')->find($partieid);
         $cartedefausser = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findOneBy(['id' => $carteid]);
-        $cartedefausse = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausse', 'parties' => $partieid]);
+        $cartedefausse = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausse'.$cartedefausser->getModeles()->getCocktailCategorie(), 'parties' => $partieid]);
         $em = $this->getDoctrine()->getManager();
         if (!empty($cartedefausse)) {
             $ordre = count($cartedefausse) + 1;
-            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteSituation('defausse'.$cartedefausser->getModeles()->getCocktailCategorie());
             $cartedefausser->setCarteOrdre($ordre);
         } else {
-            $cartedefausser->setCarteSituation('defausse');
+            $cartedefausser->setCarteSituation('defausse'.$cartedefausser->getModeles()->getCocktailCategorie());
             $cartedefausser->setCarteOrdre(1);
         }
         $partie->setJ1cartejouer('1');
         $partie->setJ2cartejouer('1');
         $em->flush();
-        return $this->redirectToRoute('afficherpartie', ['id' => $partieid]);
+        return $this->redirectToRoute('afficherpartie', ['id' => $partieid ]);
     }
 
     /**
