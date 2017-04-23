@@ -10,7 +10,7 @@
             <li>{{ cocktail.cocktailNom }}
                 {{ cocktail.cocktailCategorie }}
                 {{ cocktail.cocktailDescription }}
-                {{ cocktail.cocktailImage }}
+                <img src="{{ asset('assets/img/cartes/'~cocktail.cocktailImage ) }} " style="width : 150px;" />
             </li>
         {% endfor %}
     </ul>
