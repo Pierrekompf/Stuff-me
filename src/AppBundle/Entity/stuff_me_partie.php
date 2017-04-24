@@ -50,6 +50,12 @@ class stuff_me_partie
     private $j2cartejouer;
 
     /**
+     * @var string
+     * @ORM\Column(name="partie_gagnant", type="string", nullable=true)
+     */
+    private $gagnant;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1", fetch="EAGER")
      */
     private $joueur1;
@@ -241,5 +247,29 @@ class stuff_me_partie
     public function getJ2cartejouer()
     {
         return $this->j2cartejouer;
+    }
+
+    /**
+     * Set gagnant
+     *
+     * @param integer $gagnant
+     *
+     * @return stuff_me_partie
+     */
+    public function setGagnant($gagnant)
+    {
+        $this->gagnant = $gagnant;
+
+        return $this;
+    }
+
+    /**
+     * Get gagnant
+     *
+     * @return integer
+     */
+    public function getGagnant()
+    {
+        return $this->gagnant;
     }
 }
