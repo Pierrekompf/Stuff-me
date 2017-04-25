@@ -132,23 +132,23 @@ class PartieController extends Controller
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
         $nbcartes = count($cartesPioche);
         $em = $this->getDoctrine()->getManager();
-        if ( $nbcartes == 1 ){
+        if ( $nbcartes == 0 ){
             if ($partie->getPartieJoueur1Score() > $partie->getPartieJoueur2Score()){
                 $partie->setGagnant($partie->getJoueur1());
-                $joueur1->setTotaleScore( $joueur1->getTotaleScore() + 10);
-                if ($joueur2->getTotaleScore() >= 5){
-                    $joueur2->setTotaleScore( $joueur2->getTotaleScore() - 5);
+                $joueur1->setTotaleScore( $joueur1->getTotaleScore() + 100);
+                if ($joueur2->getTotaleScore() >= 50){
+                    $joueur2->setTotaleScore( $joueur2->getTotaleScore() - 50);
                 }
             } elseif ($partie->getPartieJoueur1Score() < $partie->getPartieJoueur2Score()) {
                 $partie->setGagnant($partie->getJoueur2());
-                if ($joueur1->getTotaleScore() >= 5) {
-                    $joueur1->setTotaleScore($joueur1->getTotaleScore() - 5);
+                if ($joueur1->getTotaleScore() >= 50) {
+                    $joueur1->setTotaleScore($joueur1->getTotaleScore() - 50);
                 }
-                $joueur2->setTotaleScore( $joueur2->getTotaleScore() + 10);
+                $joueur2->setTotaleScore( $joueur2->getTotaleScore() + 100);
             } else {
                 $partie->setGagnant('Egalité');
-                $joueur1->setTotaleScore($joueur1->getTotaleScore() + 5);
-                $joueur2->setTotaleScore($joueur2->getTotaleScore() + 5);
+                $joueur1->setTotaleScore($joueur1->getTotaleScore() + 50);
+                $joueur2->setTotaleScore($joueur2->getTotaleScore() + 50);
             }
             foreach ($cartes as $carte) {
                 $em->remove($carte);
