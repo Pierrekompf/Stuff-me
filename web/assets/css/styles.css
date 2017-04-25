@@ -12,11 +12,11 @@ body {
 
 @font-face {
   font-family: Dreams American Diner demo;
-  src: url("fonts/Dreams-American-Diner-demo.otf") format("opentype");
+  src: url("../fonts/Dreams-American-Diner-demo.otf") format("opentype");
 }
 @font-face {
   font-family: Hamburger Heaven;
-  src: url("fonts/Hamburger-Heaven.ttf") format("truetype");
+  src: url("../fonts/Hamburger-Heaven.ttf") format("truetype");
 }
 
 /* -------------------------------DEBUT NAV------------------------------- */
