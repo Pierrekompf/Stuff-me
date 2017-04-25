@@ -31,6 +31,13 @@ class stuff_me_cocktail
     /**
      * @var string
      *
+     * @ORM\Column(name="cocktail_valeur", type="smallint", nullable=true)
+     */
+    private $cocktailValeur;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="cocktail_categorie", type="string", length=255)
      */
     private $cocktailCategorie;
@@ -185,5 +192,29 @@ class stuff_me_cocktail
     public function getCocktailImage()
     {
         return $this->cocktailImage;
+    }
+
+    /**
+     * Set cocktailValeur
+     *
+     * @param integer $cocktailValeur
+     *
+     * @return stuff_me_cocktail
+     */
+    public function setCocktailValeur($cocktailValeur)
+    {
+        $this->cocktailValeur = $cocktailValeur;
+
+        return $this;
+    }
+
+    /**
+     * Get cocktailValeur
+     *
+     * @return integer
+     */
+    public function getCocktailValeur()
+    {
+        return $this->cocktailValeur;
     }
 }

@@ -29,34 +29,4 @@ class DefaultController extends Controller
         return $this->render("AppBundle:Default:index.html.twig", ['classement'=>$classement , 'classementinter'=>$classementinter]);
     }
 
-
-    /**
-     * @Route("/univers", name="univers")
-     */
-
-    public function universAction(){
-
-        $cocktails = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_cocktail')->findAll();
-
-        return $this->render("AppBundle:Default:univers.html.twig", ['cocktailtous'=>$cocktails] );
-    }
-
-
-
-    /**
-     * @Route ("/mesparties", name="mesparties")
-     */
-
-    public function mespartiesAction(){
-        return $this->render('@App/Default/mesparties.html.twig');
-    }
-
-
-    /**
-     * @Route ("/regles", name="regles")
-     */
-
-    public function reglesAction(){
-        return $this->render('@App/Default/regles.html.twig');
-    }
 }

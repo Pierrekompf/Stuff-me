@@ -24,27 +24,51 @@ class stuff_me_partie
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_joueur1_score", type="bigint")
+     * @ORM\Column(name="partie_joueur1_score", type="bigint", nullable=true)
      */
     private $partieJoueur1Score;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="partie_joueur2_score", type="bigint")
+     * @ORM\Column(name="partie_joueur2_score", type="bigint", nullable=true)
      */
     private $partieJoueur2Score;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="j1_carte_jouer", type="boolean", nullable=true)
+     */
+    private $j1cartejouer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1")
+     * @var bool
+     *
+     * @ORM\Column(name="j2_carte_jouer", type="boolean", nullable=true)
+     */
+    private $j2cartejouer;
+
+    /**
+     * @var string
+     * @ORM\Column(name="partie_gagnant", type="string", nullable=true)
+     */
+    private $gagnant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie1", fetch="EAGER")
      */
     private $joueur1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie2")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", inversedBy="partie2", fetch="EAGER")
      */
     private $joueur2;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\stuff_me_user", fetch="EAGER")
+     */
+    private $partieTour;
 
 
     /**
@@ -151,5 +175,101 @@ class stuff_me_partie
     public function getJoueur2()
     {
         return $this->joueur2;
+    }
+
+    /**
+     * Set partieTour
+     *
+     * @param \AppBundle\Entity\stuff_me_user $partieTour
+     *
+     * @return stuff_me_partie
+     */
+    public function setPartieTour(\AppBundle\Entity\stuff_me_user $partieTour = null)
+    {
+        $this->partieTour = $partieTour;
+
+        return $this;
+    }
+
+    /**
+     * Get partieTour
+     *
+     * @return \AppBundle\Entity\stuff_me_user
+     */
+    public function getPartieTour()
+    {
+        return $this->partieTour;
+    }
+
+    /**
+     * Set j1cartejouer
+     *
+     * @param boolean $j1cartejouer
+     *
+     * @return stuff_me_partie
+     */
+    public function setJ1cartejouer($j1cartejouer)
+    {
+        $this->j1cartejouer = $j1cartejouer;
+
+        return $this;
+    }
+
+    /**
+     * Get j1cartejouer
+     *
+     * @return boolean
+     */
+    public function getJ1cartejouer()
+    {
+        return $this->j1cartejouer;
+    }
+
+    /**
+     * Set j2cartejouer
+     *
+     * @param boolean $j2cartejouer
+     *
+     * @return stuff_me_partie
+     */
+    public function setJ2cartejouer($j2cartejouer)
+    {
+        $this->j2cartejouer = $j2cartejouer;
+
+        return $this;
+    }
+
+    /**
+     * Get j2cartejouer
+     *
+     * @return boolean
+     */
+    public function getJ2cartejouer()
+    {
+        return $this->j2cartejouer;
+    }
+
+    /**
+     * Set gagnant
+     *
+     * @param integer $gagnant
+     *
+     * @return stuff_me_partie
+     */
+    public function setGagnant($gagnant)
+    {
+        $this->gagnant = $gagnant;
+
+        return $this;
+    }
+
+    /**
+     * Get gagnant
+     *
+     * @return integer
+     */
+    public function getGagnant()
+    {
+        return $this->gagnant;
     }
 }

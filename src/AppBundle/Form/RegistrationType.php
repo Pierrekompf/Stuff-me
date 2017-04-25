@@ -9,16 +9,20 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nationnalite');
+        $builder->add('nationalite', 'Symfony\Component\Form\Extension\Core\Type\CountryType');
     }
 
     public function getParent()
     {
-        return 'fos_user_registration';
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_user_registration';
+    }
+
+    public function getNationalite(){
+        return $this->getBlockPrefix();
     }
 }
