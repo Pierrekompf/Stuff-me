@@ -132,7 +132,7 @@ class PartieController extends Controller
         $cartesPioche = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'pioche', 'parties' => $partieid]);
         $nbcartes = count($cartesPioche);
         $em = $this->getDoctrine()->getManager();
-        if ( $nbcartes < 1 ){
+        if ( $nbcartes == 1 ){
             if ($partie->getPartieJoueur1Score() > $partie->getPartieJoueur2Score()){
                 $partie->setGagnant($partie->getJoueur1());
                 $joueur1->setTotaleScore( $joueur1->getTotaleScore() + 100);
