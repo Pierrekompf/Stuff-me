@@ -5,38 +5,55 @@
         <div class="zbackground"></div>
     </div>
 
-    <h1>
-        Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
-        <br>
-        {% if parties[0].gagnant  != null %}
-            Gagnant : {{ parties[0].gagnant }}
-        {% endif %}
-    </h1>
-    <h3>Score :</h3>
-    <h4>Joueur 1 : {{ parties[0].partiejoueur1score }}</h4>
-    <h4>Joueur 2 : {{ parties[0].partiejoueur2score }}</h4>
+    <div class="contentacc container-fluid">
+        <div class="classement">
+            <div class="col-lg-4 col-lg-offset-3">
+                <h2>Classement FR :</h2>
+                <ul>
+                    {% for user in  classement %}
+                        <li>
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h2>Classement International :</h2>
+                <ul>
+                    {% for user in classementinter %}
+                        <li>
+                            {{ user.nationalite }}
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="plateau">
+            <!--<h1>
+                Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
+                <br>
+                {% if parties[0].gagnant  != null %}
+                    Gagnant : {{ parties[0].gagnant }}
+                {% endif %}
+            </h1>-->
+            <div class="top">
 
-    {% if user.username == parties[0].joueur1 %}
-    <div>
-        <h2>Cartes de {{ parties[0].joueur1 }}</h2>
-        <ul>
-            {% set i = 0 %}
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ1' %}
-                {% set i = i + 1 %}
-                <li>
-                      <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-                    {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 and parties[0].j1cartejouer == '0' %}
-                        <a href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
-                        <a href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
+            </div>
+            <div class="score">
+                <h3><u>SCORES</u></h3>
+                <h4>{{ parties[0].joueur1 }} : {{ parties[0].partiejoueur1score }}</h4>
+                <h4>{{ parties[0].joueur2 }} : {{ parties[0].partiejoueur2score }}</h4>
+            </div>
 
-                    {% endif %}
-                </li>
-            {% endfor %}
+            <!------ Tour de ----->
+            {#<div class="tourde">#}
+                {#<h3>Tour de : {{ parties[0].partieTour }}</h3>#}
+            {#</div>#}
 
-        </ul>
-    </div>
-
-    <!--systeme de passement de tour automatique fonctionnelle
+            <!--systeme de passement de tour automatique fonctionnelle
     <div>
     {% if user.username == parties[0].joueur1 %}
         {% if parties[0].partietour == parties[0].joueur2 %}
@@ -47,33 +64,67 @@
     {% endif %}
     </div>
     -->
+            {% if user.username == parties[0].joueur1 %}
+                <!--<h2>Cartes de {{ parties[0].joueur1 }}</h2>-->
+                <div class="cartescontainer">
+                    {% set i = 0 %}
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ1' %}
+                        {% set i = i + 1 %}
+                        <li class="carte">
+                            <a href="javascript:visibilite('{{ carte.id }}');"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
+                            {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 and parties[0].j1cartejouer == '0' %}
+                                <div class="carte-boutons" id="{{ carte.id }}" style="display: none;">
+                                    <a class="boutons-jouer" href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a>
+                                    <a class="boutons-defausser" href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
+                                </div>
+                            {% endif %}
+                        </li>
+                        <script>
+                            var divPrecedent=document.getElementById('{{ carte.id }}');
+                            function visibilite(divId)
+                            {
+                                divPrecedent.style.display='none';
+                                divPrecedent=document.getElementById(divId);
+                                divPrecedent.style.display='';
+                            }
+                        </script>
+                    {% endfor %}
 
-    {% else %}
+                </div>
 
-    <div>
-        <h2>Cartes de {{ parties[0].joueur2 }}</h2>
-        <ul>
-            {% set j = 0 %}
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ2' %}
-                {% set j = j + 1 %}
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-                    {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 and parties[0].j2cartejouer == '0'%}
-                        <a href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a> -
-                        <a href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
-                    {% else %}
+            {% else %}
+                <!--<h2>Cartes de {{ parties[0].joueur2 }}</h2>-->
+                <div class="cartescontainer">
+                    {% set j = 0 %}
+                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ2' %}
+                        {% set j = j + 1 %}
+                        <div class="carte">
+                            <a href="javascript:visibilite('{{ carte.id }}');"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
+                            {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 and parties[0].j2cartejouer == '0'%}
+                                <div class="carte-boutons" id="{{ carte.id }}" style="display: none;">
+                                    <a class="boutons-jouer" href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a>
+                                    <a class="boutons-defausser" href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
+                                </div>
+                            {% else %}
 
-                    {% endif %}
-                </li>
+                            {% endif %}
+                        </div>
+                        <script>
+                            var divPrecedent=document.getElementById('{{ carte.id }}');
+                            function visibilite(divId)
+                            {
+                                divPrecedent.style.display='none';
+                                divPrecedent=document.getElementById(divId);
+                                divPrecedent.style.display='';
+                            }
+                        </script>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-            {% endfor %}
-
-        </ul>
-    </div>
 
 
-
-    <!--systeme de passement de tour automatique fonctionnelle
+            <!--systeme de passement de tour automatique fonctionnelle
     <div>
         {% if user.username == parties[0].joueur2 %}
                {% if parties[0].partietour == parties[0].joueur1 %}
@@ -85,296 +136,504 @@
     </div>
     -->
 
-    {% endif %}
 
-
-
-
-    <div>
-        <h2>Sur le plateau</h2>
-        <ul>
-
-                <ul>
-                    <h3>Bière :</h3>
-
-                    <h4>Plateau de {{ parties[0].joueur1 }} </h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ1' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-
-
-                    <h4>Plateau de {{ parties[0].joueur2 }} </h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ2' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-                </ul>
-
-
-
-
-                <ul>
-
-                    <h3>Rhum :</h3>
-
-                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ1' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-
-                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ2' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-                </ul>
-
-
-
-
-                <ul>
-                    <h3>Tequila :</h3>
-
-                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ1' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-
-                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ2' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-                </ul>
-
-
-
-
-                <ul>
-                    <h3>Vodka :</h3>
-
-                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ1'  %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-
-                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ2'  %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-                </ul>
-
-
-
-
-                <ul>
-                    <h3>Cognac :</h3>
-
-                    <h4>Plateau de {{ parties[0].joueur1 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ1' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-
-                    <h4>Plateau de {{ parties[0].joueur2 }}</h4>
-
-                    {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ2' %}
-
-                        <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% endfor %}
-
-                </ul>
-
-        </ul>
+            <div class="pioche">
+                <div class="pioche-carte-bckgr"><img class="pch" src="{{ asset('assets/img/dos_cartes.png') }}"/></div>
+                <p class="pioche-text">({{ nbpioche }})</p>
+                {% if user.username == parties[0].joueur2 and j < 8 and parties[0].partietour == parties[0].joueur2  %}
+                    <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">
+                        <div class="pioche-carte-bckgr pioche-activated"><img src="{{ asset('assets/img/dos_cartes.png') }}"/></div>
+                    </a>
+
+                {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+                    <p class="pioche-text">({{ nbpioche }})</p>
+
+                    <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">
+                        <div class="pioche-carte-bckgr pioche-activated"><img src="{{ asset('assets/img/dos_cartes.png') }}"/></div>
+                    </a>
+
+                {% endif %}
+            </div>
+            <div class="tcontent">
+                <div class="t1">
+                    <div class="j1">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ1' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="j2">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'plateauJ2' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="defausse defausse-t1">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'defaussebiere' and carte.carteOrdre == cartemaxbiere %}
+                            <img style="opacity: 0.5" class="def" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                            {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="t2">
+                    <div class="j1">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ1' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="j2">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'plateauJ2' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="defausse">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'defaussetequila' and carte.carteOrdre == cartemaxtequila%}
+                            <img style="opacity: 0.5" class="def" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                            {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="t3">
+                    <div class="j1">
+
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ1' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="j2">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'plateauJ2' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="defausse">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'defausserhum' and carte.carteOrdre == cartemaxrhum%}
+                            <img style="opacity: 0.5" class="def" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                            {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="t4">
+                    <div class="j1">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ1'  %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="j2">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'plateauJ2'  %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="defausse">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'defaussevodka' and carte.carteOrdre == cartemaxvodka%}
+                            <img style="opacity: 0.5" class="def" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                            {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="t5">
+                    <div class="j1">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ1' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="j2">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'plateauJ2' %}
+
+                            <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+
+                        {% endfor %}
+                    </div>
+                    <div class="defausse">
+                        {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'defaussecognac' and carte.carteOrdre == cartemaxcognac %}
+
+                            <img style="opacity: 0.5" class="def" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                            {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+                            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
+                                <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">
+                                    <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
+                                </a>
+                                <style>.def{display: none}
+                                    .contentacc .defausse {
+                                        -moz-box-shadow: 0px 0px 20px 0px #fff;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #fff;
+                                        -o-box-shadow: 0px 0px 20px 0px #fff;
+                                        box-shadow: 0px 0px 20px 0px #fff;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20);
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img {
+                                        -webkit-transition: all 0.25s;
+                                        -moz-transition: all 0.25s;
+                                        transition: all 0.25s;
+                                    }
+                                    .contentacc .defausse img:hover {
+                                        width: 75px;
+                                    }
+                                    @media (max-width: 768px) {
+                                        .contentacc .defausse img:hover {
+                                            width: 60px;
+                                        }
+                                    }
+                                    .contentacc .defausse-t1 {
+                                        -moz-box-shadow: 0px 0px 20px 0px #999;
+                                        -webkit-box-shadow: 0px 0px 20px 0px #999;
+                                        -o-box-shadow: 0px 0px 20px 0px #999;
+                                        box-shadow: 0px 0px 20px 0px #999;
+                                        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=NaN, Strength=20);
+                                    }
+                                </style>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-
-
-
-    <div>
-        <h2>Pioche : {{ nbpioche }}</h2>
-
-
-        {% if user.username == parties[0].joueur2 and j < 8 and parties[0].partietour == parties[0].joueur2  %}
-            <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">piocher</a>
-
-            {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
-                <a href="{{ path('piocher', {'partieid': parties[0].id}) }}">piocher</a>
-
-        {% endif %}
-
-    </div>
-
-
-
-
-
-    <div>
-        <h2>Défausse</h2>
-
-        <ul>
-            <h3>Bière :</h3>
-
-
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'biere' and carte.carteSituation == 'defaussebiere' and carte.carteOrdre == cartemaxbiere %}
-
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% endif %}
-                </li>
-
-            {% endfor %}
-        </ul>
-
-
-
-
-
-        <ul>
-            <h3>Rhum :</h3>
-
-
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'rhum' and carte.carteSituation == 'defausserhum' and carte.carteOrdre == cartemaxrhum%}
-
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% endif %}
-                </li>
-
-            {% endfor %}
-        </ul>
-
-
-
-
-
-        <ul>
-            <h3>Tequila :</h3>
-
-
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'tequila' and carte.carteSituation == 'defaussetequila' and carte.carteOrdre == cartemaxtequila%}
-
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% endif %}
-                </li>
-
-            {% endfor %}
-        </ul>
-
-
-
-        <ul>
-            <h3>Vodka :</h3>
-
-
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'vodka' and carte.carteSituation == 'defaussevodka' and carte.carteOrdre == cartemaxvodka%}
-
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8  %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% endif %}
-                </li>
-
-            {% endfor %}
-        </ul>
-
-
-
-
-        <ul>
-            <h3>Cognac :</h3>
-
-
-            {% for carte in cartes if carte.parties.id == parties[0].id and carte.modeles.cocktailCategorie == 'cognac' and carte.carteSituation == 'defaussecognac' and carte.carteOrdre == cartemaxcognac %}
-
-                <li>
-                    <img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} " style="width : 150px;"/>
-
-                    {% if user.username == parties[0].joueur2 and parties[0].partietour == parties[0].joueur2 and j < 8 %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% elseif user.username == parties[0].joueur1 and parties[0].partietour == parties[0].joueur1 and i < 8  %}
-                        <a href="{{ path('recup', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Récuperer</a>
-
-                    {% endif %}
-                </li>
-
-            {% endfor %}
-        </ul>
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-
 {% endblock %}

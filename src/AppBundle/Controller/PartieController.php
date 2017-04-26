@@ -36,7 +36,18 @@ class PartieController extends Controller
         $cartemaxvodka = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defaussevodka', 'parties' => $id]));
         $cartemaxrhum = count($this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'defausserhum', 'parties' => $id]));
         $user = $this->getUser();
-        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user , 'nbpioche' => $nbpioche, 'cartemaxbiere' => $cartemaxbiere, 'cartemaxvodka' => $cartemaxvodka, 'cartemaxtequila' => $cartemaxtequila, 'cartemaxrhum' => $cartemaxrhum, 'cartemaxcognac' => $cartemaxcognac]);
+        $classement = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
+            array('nationalite' => 'FR'),
+            array('totale_score' => 'desc'),
+            5
+        );
+
+        $classementinter = $this->getDoctrine()->getManager()->getRepository('AppBundle:stuff_me_user')->findBy(
+            array (),
+            array('totale_score' => 'desc'),
+            5
+        );
+        return $this->render('@App/Default/afficherpartie.html.twig', ['cartes' => $cartes, 'parties' => $partie, 'user' => $user , 'nbpioche' => $nbpioche, 'cartemaxbiere' => $cartemaxbiere, 'cartemaxvodka' => $cartemaxvodka, 'cartemaxtequila' => $cartemaxtequila, 'cartemaxrhum' => $cartemaxrhum, 'cartemaxcognac' => $cartemaxcognac, 'classement'=>$classement , 'classementinter'=>$classementinter]);
     }
 
     /**
