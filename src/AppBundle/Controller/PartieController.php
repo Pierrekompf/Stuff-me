@@ -267,8 +267,8 @@ class PartieController extends Controller
         $score = $jouer->getPartieJoueur1Score();
 
         if (!empty($cartesplateau)) {
-            $remplis = 0;
             $etejouer = 0;
+            $remplis = 0;
             foreach ($cartesplateau as $val) {
                 if ($val->getModeles()->getCocktailCategorie() == $categorie) {
                     if ($val->getModeles()->getCocktailValeur() <= $valeur) {
@@ -323,8 +323,8 @@ class PartieController extends Controller
             $cartesplateau = $this->getDoctrine()->getRepository('AppBundle:stuff_me_cartes')->findBy(['carteSituation' => 'plateauJ2', 'parties' => $partieid]);
             $score = $jouer->getPartieJoueur2Score();
             if (!empty($cartesplateau)) {
-                $remplis = 0;
                 $etejouer = 0;
+                $remplis = 0;
                 foreach ($cartesplateau as $val) {
                     if ($val->getModeles()->getCocktailCategorie() == $categorie) {
                         if ($val->getModeles()->getCocktailValeur() <= $valeur) {
