@@ -205,6 +205,7 @@ body {
   -o-box-shadow: 0px -1px 5px 0px #656565;
   box-shadow: 0px -1px 5px 0px #656565;
   filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=90, Strength=5);
+  border-top: 2px solid #e2c57a;
 }
 .footer a {
   position: absolute;
@@ -300,99 +301,44 @@ body {
 
 /* -------------------------------------Classement ----------------------------------*/
 
-.classement {
-  color : #e2c57a;
+.pageplateau .classement {
+  margin: 2.5% auto 0 auto;
+  height: 300px;
+  width: 95%;
+  background-color: hsla(43,64%,65%,0.85);
 }
+
 /* -------------------------------------Classement ----------------------------------*/
 
-/* -------------------------------------Univers ----------------------------------*/
-.univ-cartes {
-  text-align: center;
-  background-color: rgb(189, 172, 128);
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 80px;
-  padding-bottom: 80px;
-  margin: 0;
-}
-.univ-carte {
-  list-style: none;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.univ-carte-cadre {
-  background-color: #7b5e42;
-  width: 200px;
-  margin: 0 auto;
-  border-bottom: 7px solid #e2c57a;
-  border-left: 2px solid #e2c57a;
-  border-right: 2px solid #e2c57a;
-  border-top: 4px solid #e2c57a;
-  border-radius: 4px;
-}
-.univ-carte .univ-carte-cadre h2 {
-  text-transform: uppercase;
-  font-size: 21px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin: 0;
-  color: lemonchiffon;
-}
-
-.univ-carte .univ-carte-cadre img {
-  width: 100%;
-  border: 1px solid #e2c57a;
-}
-
-.univ-carte .univ-carte-cadre h3 {
-  font-size: 18px;
-  margin: 0;
-  padding-top: 10px;
-  color: #e2c57a;
-}
-.univ-carte .univ-carte-cadre p {
-  font-size: 14px;
-  margin: 0;
-  padding-top: 7px;
-  padding-bottom: 10px;
-  color: #e2c57a;
-}
-/* -------------------------------------Univers ----------------------------------*/
-
-
-
-
-
-
-/* plateau */
-.contentacc {
+/* ------------------------------------- Plateau ----------------------------------*/
+.pageplateau {
   margin: 0;
   padding: 0;
   background-image: url("../img/fond_plateau.jpg");
   background-size: cover;
+  border-top: 2px solid #e2c57a;
 }
 
-.contentacc .plateau {
+.pageplateau .plateau {
   height: 650px;
   position: relative;
   width: 95%;
   margin: 5% auto 5% auto;
 }
 
-.contentacc .plateau .top {
+.pageplateau .plateau .top {
   position: relative;
   width: 100%;
   height: 120px;
   z-index: 999;
 }
 
-.contentacc .tcontent {
+.pageplateau .tcontent {
   width: 100%;
   overflow: hidden;
 }
 
-.contentacc .t1 {
+.pageplateau .t1 {
   width: 20%;
   height: 400px;
   background-color: hsla(160, 78%, 13%, 1);
@@ -400,7 +346,7 @@ body {
   position: relative;
   border: 1px solid #e2c57a;
 }
-.contentacc .t2 {
+.pageplateau .t2 {
   width: 20%;
   height: 400px;
   background-color: hsla(37, 86%, 37%, 1);
@@ -409,7 +355,7 @@ body {
   border: 1px solid #e2c57a;
 
 }
-.contentacc .t3 {
+.pageplateau .t3 {
   width: 20%;
   height: 400px;
   background-color: hsla(182, 62%, 32%, 1);
@@ -417,7 +363,7 @@ body {
   position: relative;
   border: 1px solid #e2c57a;
 }
-.contentacc .t4 {
+.pageplateau .t4 {
   width: 20%;
   height: 400px;
   background-color: hsla(359, 78%, 42%, 1);
@@ -426,7 +372,7 @@ body {
   border: 1px solid #e2c57a;
 
 }
-.contentacc .t5 {
+.pageplateau .t5 {
   width: 20%;
   height: 400px;
   background-color: hsla(14, 71%, 30%, 1);
@@ -438,7 +384,7 @@ body {
 
 }
 
-.contentacc .defausse {
+.pageplateau .defausse {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -450,11 +396,11 @@ body {
   border: 2px solid #2b2b2b;
 }
 
-.contentacc .defausse-t1 {
+.pageplateau .defausse-t1 {
   border-color: black;
 }
 
-.contentacc .defausse img {
+.pageplateau .defausse img {
   width: 50px;
   border: 2px solid #e2c57a;
   position: absolute;
@@ -464,7 +410,7 @@ body {
   border-radius: 3px;
 }
 
-.contentacc .cartescontainer {
+.pageplateau .cartescontainer {
   position: absolute;
   text-align: center;
   z-index: 8000;
@@ -474,7 +420,7 @@ body {
   width: 100%;
 }
 
-.contentacc .cartescontainer .carte {
+.pageplateau .cartescontainer .carte {
   background-color: #e2c57a;
   border-radius: 5px;
   display: inline-block;
@@ -484,15 +430,15 @@ body {
   padding: 3px;
 }
 
-.contentacc .cartescontainer .carte img {
+.pageplateau .cartescontainer .carte img {
   width: 70px;
 }
 @media (max-width: 1199px) {
-  .contentacc .cartescontainer .carte img {
+  .pageplateau .cartescontainer .carte img {
     width: 6vw;
   }
 }
-.contentacc .score {
+.pageplateau .score {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -500,18 +446,18 @@ body {
   color: #e2c57a;
 }
 
-.contentacc .score h3 {
+.pageplateau .score h3 {
   font-size: 24px;
   margin-top: 0;
   font-family: "Hamburger Heaven";
 }
 
-.contentacc .score h4 {
+.pageplateau .score h4 {
   font-size: 16px;
   font-family: "Hamburger Heaven";
 }
 
-.contentacc .pioche {
+.pageplateau .pioche {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -519,7 +465,7 @@ body {
   color: #e2c57a;
 }
 
-.contentacc .pioche-text {
+.pageplateau .pioche-text {
   position: absolute;
   top: 50px;
   right: 90px;
@@ -527,18 +473,18 @@ body {
   font-size: 24px;
 }
 
-.contentacc .pioche-carte-bckgr {
+.pageplateau .pioche-carte-bckgr {
   padding: 1px;
   border-radius: 5px;
   background-color: #e2c57a;
 
 }
 
-.contentacc .pioche img {
+.pageplateau .pioche img {
   width: 60px;
 }
 
-.contentacc .pioche-activated {
+.pageplateau .pioche-activated {
   position: absolute;
   top: -5px;
   left: -7px;
@@ -548,7 +494,7 @@ body {
   transition: all 0.25s;
 }
 
-.contentacc .pioche-activated:hover {
+.pageplateau .pioche-activated:hover {
   top: 2px;
   left: -14px;
   transform:rotate(-4deg);
@@ -559,13 +505,13 @@ body {
 
 
 @media (min-width: 1200px) {
-  .contentacc .j1 {
+  .pageplateau .j1 {
     height: 50%;
     list-style: none;
     position: relative;
   }
 
-  .contentacc .j1 img {
+  .pageplateau .j1 img {
     width: 50px;
     position: absolute;
     border: 2px solid #e2c57a;
@@ -578,47 +524,47 @@ body {
     transition: all 0.25s;
   }
 
-  .contentacc .j1 img:nth-child(2) {
+  .pageplateau .j1 img:nth-child(2) {
     left: 10%;
     z-index: 101;
   }
-  .contentacc .j1 img:nth-child(3) {
+  .pageplateau .j1 img:nth-child(3) {
     left: 17%;
     z-index: 102;
   }
-  .contentacc .j1 img:nth-child(4) {
+  .pageplateau .j1 img:nth-child(4) {
     left: 24%;
     z-index: 103;
   }
-  .contentacc .j1 img:nth-child(5) {
+  .pageplateau .j1 img:nth-child(5) {
     left: 31%;
     z-index: 104;
   }
-  .contentacc .j1 img:nth-child(6) {
+  .pageplateau .j1 img:nth-child(6) {
     left: 38%;
     z-index: 105;
   }
-  .contentacc .j1 img:nth-child(7) {
+  .pageplateau .j1 img:nth-child(7) {
     left: 45%;
     z-index: 106;
   }
-  .contentacc .j1 img:nth-child(8) {
+  .pageplateau .j1 img:nth-child(8) {
     left: 52%;
     z-index: 107;
   }
-  .contentacc .j1 img:nth-child(9) {
+  .pageplateau .j1 img:nth-child(9) {
     left: 59%;
     z-index: 108;
   }
-  .contentacc .j1 img:nth-child(10) {
+  .pageplateau .j1 img:nth-child(10) {
     left: 66%;
     z-index: 109;
   }
-  .contentacc .j1 img:nth-child(12) {
+  .pageplateau .j1 img:nth-child(12) {
     left: 73%;
     z-index: 110;
   }
-  .contentacc .j1 img:hover{
+  .pageplateau .j1 img:hover{
     width: 85px;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -627,13 +573,13 @@ body {
     z-index: 9999;
   }
 
-  .contentacc .j2 {
+  .pageplateau .j2 {
     height: 50%;
     list-style: none;
     position: relative;
   }
 
-  .contentacc .j2 img {
+  .pageplateau .j2 img {
     width: 50px;
     position: absolute;
     border: 2px solid #e2c57a;
@@ -646,47 +592,47 @@ body {
     transition: all 0.25s;
   }
 
-  .contentacc .j2 img:nth-child(2) {
+  .pageplateau .j2 img:nth-child(2) {
     left: 10%;
     z-index: 101;
   }
-  .contentacc .j2 img:nth-child(3) {
+  .pageplateau .j2 img:nth-child(3) {
     left: 17%;
     z-index: 102;
   }
-  .contentacc .j2 img:nth-child(4) {
+  .pageplateau .j2 img:nth-child(4) {
     left: 24%;
     z-index: 103;
   }
-  .contentacc .j2 img:nth-child(5) {
+  .pageplateau .j2 img:nth-child(5) {
     left: 31%;
     z-index: 104;
   }
-  .contentacc .j2 img:nth-child(6) {
+  .pageplateau .j2 img:nth-child(6) {
     left: 38%;
     z-index: 105;
   }
-  .contentacc .j2 img:nth-child(7) {
+  .pageplateau .j2 img:nth-child(7) {
     left: 45%;
     z-index: 106;
   }
-  .contentacc .j2 img:nth-child(8) {
+  .pageplateau .j2 img:nth-child(8) {
     left: 52%;
     z-index: 107;
   }
-  .contentacc .j2 img:nth-child(9) {
+  .pageplateau .j2 img:nth-child(9) {
     left: 59%;
     z-index: 108;
   }
-  .contentacc .j2 img:nth-child(10) {
+  .pageplateau .j2 img:nth-child(10) {
     left: 66%;
     z-index: 109;
   }
-  .contentacc .j2 img:nth-child(12) {
+  .pageplateau .j2 img:nth-child(12) {
     left: 73%;
     z-index: 110;
   }
-  .contentacc .j2 img:hover{
+  .pageplateau .j2 img:hover{
     width: 85px;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
@@ -695,7 +641,7 @@ body {
     z-index: 9999;
   }
 }
-.contentacc .j1 img {
+.pageplateau .j1 img {
   width: 50px;
   position: absolute;
   border: 2px solid #e2c57a;
@@ -708,47 +654,47 @@ body {
   transition: all 0.25s;
 }
 
-.contentacc .j1 img:nth-child(2) {
+.pageplateau .j1 img:nth-child(2) {
   left: 8%;
   z-index: 101;
 }
-.contentacc .j1 img:nth-child(3) {
+.pageplateau .j1 img:nth-child(3) {
   left: 14%;
   z-index: 102;
 }
-.contentacc .j1 img:nth-child(4) {
+.pageplateau .j1 img:nth-child(4) {
   left: 20%;
   z-index: 103;
 }
-.contentacc .j1 img:nth-child(5) {
+.pageplateau .j1 img:nth-child(5) {
   left: 26%;
   z-index: 104;
 }
-.contentacc .j1 img:nth-child(6) {
+.pageplateau .j1 img:nth-child(6) {
   left: 32%;
   z-index: 105;
 }
-.contentacc .j1 img:nth-child(7) {
+.pageplateau .j1 img:nth-child(7) {
   left: 38%;
   z-index: 106;
 }
-.contentacc .j1 img:nth-child(8) {
+.pageplateau .j1 img:nth-child(8) {
   left: 44%;
   z-index: 107;
 }
-.contentacc .j1 img:nth-child(9) {
+.pageplateau .j1 img:nth-child(9) {
   left: 50%;
   z-index: 108;
 }
-.contentacc .j1 img:nth-child(10) {
+.pageplateau .j1 img:nth-child(10) {
   left: 56%;
   z-index: 109;
 }
-.contentacc .j1 img:nth-child(12) {
+.pageplateau .j1 img:nth-child(12) {
   left: 62%;
   z-index: 110;
 }
-.contentacc .j1 img:hover{
+.pageplateau .j1 img:hover{
   width: 85px;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
@@ -757,13 +703,13 @@ body {
   z-index: 9999;
 }
 
-.contentacc .j2 {
+.pageplateau .j2 {
   height: 50%;
   list-style: none;
   position: relative;
 }
 
-.contentacc .j2 img {
+.pageplateau .j2 img {
   width: 50px;
   position: absolute;
   border: 2px solid #e2c57a;
@@ -776,47 +722,47 @@ body {
   transition: all 0.25s;
 }
 
-.contentacc .j2 img:nth-child(2) {
+.pageplateau .j2 img:nth-child(2) {
   left: 8%;
   z-index: 101;
 }
-.contentacc .j2 img:nth-child(3) {
+.pageplateau .j2 img:nth-child(3) {
   left: 14%;
   z-index: 102;
 }
-.contentacc .j2 img:nth-child(4) {
+.pageplateau .j2 img:nth-child(4) {
   left: 20%;
   z-index: 103;
 }
-.contentacc .j2 img:nth-child(5) {
+.pageplateau .j2 img:nth-child(5) {
   left: 26%;
   z-index: 104;
 }
-.contentacc .j2 img:nth-child(6) {
+.pageplateau .j2 img:nth-child(6) {
   left: 32%;
   z-index: 105;
 }
-.contentacc .j2 img:nth-child(7) {
+.pageplateau .j2 img:nth-child(7) {
   left: 38%;
   z-index: 106;
 }
-.contentacc .j2 img:nth-child(8) {
+.pageplateau .j2 img:nth-child(8) {
   left: 44%;
   z-index: 107;
 }
-.contentacc .j2 img:nth-child(9) {
+.pageplateau .j2 img:nth-child(9) {
   left: 50%;
   z-index: 108;
 }
-.contentacc .j2 img:nth-child(10) {
+.pageplateau .j2 img:nth-child(10) {
   left: 56%;
   z-index: 109;
 }
-.contentacc .j2 img:nth-child(12) {
+.pageplateau .j2 img:nth-child(12) {
   left: 62%;
   z-index: 110;
 }
-.contentacc .j2 img:hover{
+.pageplateau .j2 img:hover{
   width: 85px;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
@@ -826,25 +772,18 @@ body {
 }
 
 @media (max-width: 768px) {
-  .contentacc .j1 img {
+  .pageplateau .j1 img {
     width: 6vw;
   }
-  .contentacc .j1 img:hover {
+  .pageplateau .j1 img:hover {
     width: 11vw;
   }
-  .contentacc .j2 img {
+  .pageplateau .j2 img {
     width: 6vw;
   }
-  .contentacc .j2 img:hover {
+  .pageplateau .j2 img:hover {
     width: 11vw;
   }
-}
-
-.classement {
-  margin: 2.5% auto 0 auto;
-  height: 300px;
-  width: 95%;
-  background-color: hsla(43,64%,65%,0.85);
 }
 
 .carte-boutons {
@@ -929,18 +868,18 @@ body {
     height: 3em; /* hauteur du parent */
     vertical-align: middle;
   }
-  .contentacc .j1 {
+  .pageplateau .j1 {
     height: 50%;
     list-style: none;
     position: relative;
   }
-  .contentacc .cartescontainer .carte {
+  .pageplateau .cartescontainer .carte {
     padding: 0.4vw;
   }
 }
 
 @media (max-width: 768px) {
-  .contentacc .cartescontainer {
+  .pageplateau .cartescontainer {
     text-align: left;
     padding-left: 1vw;
   }
@@ -958,3 +897,26 @@ body {
     width: 10vw;
   }
 }
+/* ------------------------------------- Fin Plateau ----------------------------------*/
+
+/* -------------------------------PARALLAX------------------------------- */
+.zone {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  clear: both;
+}
+
+#z0 {
+  background-image: url("../img/zone1.jpg");
+  height: 300px;
+}
+
+.zbackground { /* ajoute un filtre noir sur la zone */
+  width: 100%;
+  height: 100%;
+  background-color: #0f0f0f;
+  opacity: 0.7;
+}
+/* -------------------------------FIN PARALLAX------------------------------- */

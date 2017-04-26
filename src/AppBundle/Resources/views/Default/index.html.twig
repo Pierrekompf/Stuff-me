@@ -14,18 +14,12 @@
                 <li data-target="#mycarousel" data-slide-to="1"></li>
                 <li data-target="#mycarousel" data-slide-to="2"></li>
                 <li data-target="#mycarousel" data-slide-to="3"></li>
-                <li data-target="#mycarousel" data-slide-to="4"></li>
             </ol>
 
             <!-- Différentes slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item">
-                    <img src="{{ asset('assets/img/zone1.jpg') }}" data-color="lightblue" alt="First Image">
-                    <div class="carousel-caption">
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('assets/img/1.jpg') }}" data-color="firebrick" alt="Second Image">
+                    <img src="{{ asset('assets/img/zone2.jpg') }}" data-color="firebrick" alt="Second Image">
                     <div class="carousel-caption">
                     </div>
                 </div>
@@ -35,12 +29,12 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('assets/img/1.jpg') }}" data-color="lightgreen" alt="Fourth Image">
+                    <img src="{{ asset('assets/img/zone3.jpg') }}" data-color="lightgreen" alt="Fourth Image">
                     <div class="carousel-caption">
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('assets/img/zone1.jpg') }}" data-color="tomato" alt="Fifth Image">
+                    <img src="{{ asset('assets/img/soon-bg.jpg') }}" data-color="lightblue" alt="First Image">
                     <div class="carousel-caption">
                     </div>
                 </div>
@@ -49,7 +43,7 @@
             <div class="header-content">
                 <h1>Stuff Me</h1>
                 <hr/>
-                <a class="btn page-scroll" href="#jeu">Jouer</a>
+                <a class="btn page-scroll" href="#decouvrir">Découvrir</a>
             </div>
             <!-- Controls left et right
             <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
@@ -64,7 +58,7 @@
         </div>
     </div>
     <!-- Fin du Caroussel d'image Header -->
-    <div class="contentacc container-fluid">
+    <!--<div class="contentacc container-fluid">
         <section class="classement">
             <div class="col-lg-4 col-lg-offset-3">
             <h2>Classement FR :</h2>
@@ -90,6 +84,54 @@
             </ul>
             </div>
         </section>
-        
+    </div>-->
+    <div id="decouvrir" class="contentrgl container-fluid">
+
+    <div class="rglzone1">
+        <div class="r1">
+            <div class="fond1">
+            </div>
+            <div class="r1r2center">
+                <h2>Le jeu</h2>
+                <p class="hideme">
+                    Deux jeunes stagiaires se disputent la place du barman. </p> <p>Affrontez votre adversaire et tentez de le vaincre en battant son chiffre d’affaire tout en découvrant un maximum de cocktail à partager entre amis !
+                </p>
+
+            </div>
+
+        </div>
+        <div class="r2">
+            <div class="fond2">
+            </div>
+            <div class="r1r2center">
+                <h2>Le but du jeu</h2>
+                <p class="hideme">Vous devez réaliser un meilleur chiffre d’affaire que votre adversaire. </p><p>Pour cela, vous devez servir différents cocktails à base d’alcool ou non.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="r3">
+        <div class="row hideme">
+            <div class="r31 col-sm-4 col-xs-12">
+                <div class="imgcontain"><img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.9" alt="dos de cartes"/></div>
+                <p>On dispose les 5 cartes d’alcools entre les deux joueurs, on mélange le reste des cartes et on en distribue 8 à chaque joueur. Le reste des cartes constitue la pioche. <br/><br/>Le joueur actif doit choisir une carte pour commencer ou continuer une suite en posant sa carte sur la table. Le joueur pioche ensuite une nouvelle carte dans la pioche ou dans les cartes qui ont été défaussées précédemment.<br/><br/> Chaque joueur doit remplir ses propres suites mais peut aussi voir les suites réalisées par son adversaire.
+                </p>
+            </div>
+            <div class="r32 col-sm-4 col-xs-12">
+                <div class="imgcontain"><img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.8" alt="dos de cartes"/></div>
+                <p>Pour constituer une suite, les cartes doivent appartenir au même objectif. <br/><br/>Le joueur peut commencer par n’importe quelle carte mais la suite doit être réalisée dans un ordre croissant. Pour gagner plus de points, le joueur peut commencer sa suite par une ou plusieurs cartes extra. <br/><br/>ATTENTION ! Chaque suite commencée, même par une carte extra seront comptabilisée.
+                    Si le joueur ne peut ou ne veut pas jouer, il doit se défausser d’une carte, qu’il doit poser face visible sur la carte objectif correspondante et en piocher une autre.</p></div>
+            <div class="r33 col-sm-4 col-xs-12">
+                <div class="imgcontain"><img src="{{ asset('assets/img/dos_cartes.png') }}" style="opacity: 0.7" alt="dos de cartes"/></div>
+                <p>Il existe 3 types de cartes différentes : les 5 composants principaux des cocktails, 5*9 cartes représentants des cocktails et 5*3 cartes extra.
+                    <br/><br/>La partie s’achève lorsque la dernière carte de la pioche a été tirée. Suite à cela, on réalise le décompte des points.
+                    Pour compter les points
+                    <br/><br/>Pour chaque suite, les points sont comptés comme suit : on additionne les valeurs de la suite, on soustrait 20, on multiplie le résultat par (2 si il y a une carte EXTRA, 3 si il y a deux cartes EXTRA, 4 si il y a trois cartes EXTRA )</p></div>
+        </div>
+    </div>
+    <div class="r4">
+        <div class="fondz1"><img class="hideme" src="{{ asset('assets/img/logo.png')}}"/></div>
+        <div class="fondz2"><img class="hideme" src="{{ asset('assets/img/logo.png')}}"/></div>
+        <div class="video"><iframe src="https://www.youtube.com/embed/lSkVhq7OcXA" frameborder="0" allowfullscreen></iframe></div>
     </div>
 {% endblock %}

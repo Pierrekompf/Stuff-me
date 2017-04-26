@@ -5,32 +5,7 @@
         <div class="zbackground"></div>
     </div>
 
-    <div class="contentacc container-fluid">
-        <div class="classement">
-            <div class="col-lg-4 col-lg-offset-3">
-                <h2>Classement FR :</h2>
-                <ul>
-                    {% for user in  classement %}
-                        <li>
-                            {{ user.username }}
-                            {{ user.totaleScore }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <h2>Classement International :</h2>
-                <ul>
-                    {% for user in classementinter %}
-                        <li>
-                            {{ user.nationalite }}
-                            {{ user.username }}
-                            {{ user.totaleScore }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+    <div class="pageplateau container-fluid">
         <div class="plateau">
             <!--<h1>
                 Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
@@ -50,7 +25,7 @@
 
             <!------ Tour de ----->
             {#<div class="tourde">#}
-                {#<h3>Tour de : {{ parties[0].partieTour }}</h3>#}
+            {#<h3>Tour de : {{ parties[0].partieTour }}</h3>#}
             {#</div>#}
 
             <!--systeme de passement de tour automatique fonctionnelle
@@ -178,7 +153,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -188,20 +163,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -214,7 +189,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -224,20 +199,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -272,7 +247,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -282,20 +257,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -308,7 +283,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -318,20 +293,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -367,7 +342,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -377,20 +352,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -404,7 +379,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -414,20 +389,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -464,7 +439,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -474,20 +449,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -500,7 +475,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -510,20 +485,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -560,7 +535,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -570,20 +545,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -596,7 +571,7 @@
                                     <img class="recup" alt="recuperer" src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/>
                                 </a>
                                 <style>.def{display: none}
-                                    .contentacc .defausse {
+                                    .pageplateau .defausse {
                                         -moz-box-shadow: 0px 0px 20px 0px #fff;
                                         -webkit-box-shadow: 0px 0px 20px 0px #fff;
                                         -o-box-shadow: 0px 0px 20px 0px #fff;
@@ -606,20 +581,20 @@
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img {
+                                    .pageplateau .defausse img {
                                         -webkit-transition: all 0.25s;
                                         -moz-transition: all 0.25s;
                                         transition: all 0.25s;
                                     }
-                                    .contentacc .defausse img:hover {
+                                    .pageplateau .defausse img:hover {
                                         width: 75px;
                                     }
                                     @media (max-width: 768px) {
-                                        .contentacc .defausse img:hover {
+                                        .pageplateau .defausse img:hover {
                                             width: 60px;
                                         }
                                     }
-                                    .contentacc .defausse-t1 {
+                                    .pageplateau .defausse-t1 {
                                         -moz-box-shadow: 0px 0px 20px 0px #999;
                                         -webkit-box-shadow: 0px 0px 20px 0px #999;
                                         -o-box-shadow: 0px 0px 20px 0px #999;
@@ -633,6 +608,31 @@
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="classement">
+            <div class="col-lg-4 col-lg-offset-3">
+                <h2>Classement FR :</h2>
+                <ul>
+                    {% for user in  classement %}
+                        <li>
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h2>Classement International :</h2>
+                <ul>
+                    {% for user in classementinter %}
+                        <li>
+                            {{ user.nationalite }}
+                            {{ user.username }}
+                            {{ user.totaleScore }}
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

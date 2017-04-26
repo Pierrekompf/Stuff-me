@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/regles.css') }}" />
         <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -32,13 +31,7 @@
                         <a href="{{ path ('index') }}">Accueil</a>
                     </li>
                     <li class="">
-                        <a href="{{ path ('regles') }}">Règles</a>
-                    </li>
-                    <li class="">
                         <a href="{{ path ('univers') }}">L'univers</a>
-                    </li>
-                    <li class="">
-                        <a href="{{ path ('tutoriel') }}">Tutoriel</a>
                     </li>
                     <li class="">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
