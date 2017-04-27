@@ -23,9 +23,9 @@
             <!------ Tour de ----->
             <div class="tourde">
                 {% if parties[0].gagnant  != null %}
-                    Gagnant : {{ parties[0].gagnant }}
+                    <h3>Gagnant : {{ parties[0].gagnant }}</h3>
                 {% else %}
-                <h3>Tour de : {{ parties[0].partieTour }}</h3>
+                    <h3>Tour de : {{ parties[0].partieTour }}</h3>
                 {% endif %}
             </div>
 
