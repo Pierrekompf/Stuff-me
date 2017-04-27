@@ -21,7 +21,7 @@ body {
 
 /* -------------------------------DEBUT NAV------------------------------- */
 .navbar-default {
-  background-color: #5a3d28;
+  background-color: #564a41;
   border-color: transparent;
   z-index: 9999;
 }
@@ -36,9 +36,21 @@ body {
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-size: 12px;
-  color: white;
+  color: #e2c57a;
   text-transform: uppercase;
+  font-family: "Hamburger Heaven";
+  background-color: #5a3d28;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
 }
+.navbar-default .navbar-header .navbar-toggle:hover {
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  transition: all 0.25s;
+  background-color: #886a55;
+}
+
 @media (min-width: 768px) {
   .navbar-default {
     background-color: transparent;
@@ -69,11 +81,12 @@ body {
     transition: all 0.25s;
   }
   .navbar-default.affix {
-    background-color: #5a3d28;
+    background-color: #564a41;
     height:50px;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
     transition: all 0.25s;
+    border-bottom: 2px solid #e2c57a;
   }
   .navbar-default.affix .navbar-header .navbar-brand {
     font-size: 0;
@@ -95,21 +108,41 @@ body {
   margin-right: 15px;
   height:35px;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .logo {
     margin-left: 10px;
+  }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-bottom: 2px solid #e2c57a;
   }
   .navbar-default .navbar-header .navbar-brand {
     font-size: 14px;
   }
   nav ul li {
     text-align: center;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
   }
   nav ul .active {
     background-color: white;
   }
   nav ul li:hover {
-    background-color: #9d9d9d;
+    background-color: #e2c57a;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
+  }
+  .navbar-header {
+    border-bottom: 2px solid #e2c57a;
+  }
+  .navbar-default .navbar-nav > li > a {
+    color: ghostwhite;
+    text-transform: uppercase;
+    font-family: "Roboto Condensed";
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #64574e;
   }
 }
 /* ------FIN QUAND LARGEUR FENETRE/ECRAN < 768px------ */
@@ -193,6 +226,15 @@ body {
     transform: scaleX(0);
   }
 }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: white;
+}
+.navbar-toggle {
+  border-radius: 0;
+}
+.navbar-default .navbar-toggle {
+  border-color: #e2c57a;
+}
 /* -------------------------------FIN NAV------------------------------- */
 
 /* -------------------------------FOOTER------------------------------- */
@@ -223,13 +265,12 @@ body {
 }
 .footer p {
   color: white;
-  font-family: 'Open Sans Condensed', sans-serif;
   position: absolute;
 }
 .footer .p1 {
   right: 20px;
   top: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 .footer .p2 {
   left: 80px;
@@ -302,10 +343,55 @@ body {
 /* -------------------------------------Classement ----------------------------------*/
 
 .pageplateau .classement {
-  margin: 2.5% auto 0 auto;
-  height: 300px;
+  margin: 10% auto 10% auto;
   width: 95%;
-  background-color: hsla(43,64%,65%,0.85);
+}
+
+.pageplateau .classement .clsmt1, .pageplateau .classement .clsmt2 {
+  text-align: center;
+  border: 1px solid #e2c57a;
+  padding: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.pageplateau .classement .clsmt1 h2, .pageplateau .classement .clsmt2 h2 {
+  text-transform: uppercase;
+  font-family: "Hamburger Heaven";
+  margin: 0;
+  background-color: #e2c57a;
+  font-size: 22px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pageplateau .classement .clsmt1 ul, .pageplateau .classement .clsmt2 ul {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.pageplateau .classement .clsmt1 ul li, .pageplateau .classement .clsmt2 ul li {
+  width: 100%;
+  list-style: none;
+  border-bottom: 1px solid #e2c57a;
+  padding: 15px;
+  color: #fafafa;
+  font-family: "Roboto Condensed";
+}
+
+.pageplateau .classement .clsmt1 ul li:nth-child(even), .pageplateau .classement .clsmt2 ul li:nth-child(even) {
+  background-color: #6b513d;
+}
+
+.pageplateau .classement .clsmt1 ul li:nth-child(odd), .pageplateau .classement .clsmt2 ul li:nth-child(odd) {
+  background-color: #5a4536;
+}
+
+@media (max-width: 768px) {
+  .pageplateau .classement .clsmt1 {
+    margin-bottom: 50px;
+  }
 }
 
 /* -------------------------------------Classement ----------------------------------*/

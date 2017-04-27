@@ -6,13 +6,17 @@
         <div class="zbackground"></div>
     </div>
 
-    <table class="table">
-        {% for joueur in joueurs if joueur.username != user.username %}
-            <tr>
-                <td>{{ joueur.username }}</td>
-                <td><a href="{{ path('creer_partie', {'joueur':joueur.id}) }}">Inviter à jouer</a></td>
-            </tr>
-        {% endfor %}
-    </table>
+    <section class="custom-form">
+        <h2>Créer une partie</h2>
+
+        <table class="table">
+            {% for joueur in joueurs if joueur.username != user.username %}
+                <tr>
+                    <td>{{ joueur.username }}</td>
+                    <td><a href="{{ path('creer_partie', {'joueur':joueur.id}) }}">Inviter à jouer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
 
 {% endblock %}

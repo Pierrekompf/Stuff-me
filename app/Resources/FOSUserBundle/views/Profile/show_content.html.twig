@@ -1,13 +1,90 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show" style="margin-left: 33%;">
-    <img src="{{ asset('assets/img/logo.png') }}"/>
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p>Nationalité : {{ user.nationalite }}</p>
-    <p>Win : {{ user.win }}</p>
-    <p>Loose : {{ user.loose }}</p>
-    <p>Score totale : {{ user.totalescore }}</p>
-    <p>Vous pouvez éditer votre profil ici : <a href="{{ path('fos_user_profile_edit') }}">Editer</a></p>
-    <p>Vous pouvez voir vos parties en cours ici : <a href="{{ path('mesparties') }}">Mes Parties</a></p>
+<div class="container">
+
+    <div class="card hovercard">
+        <div class="card-background">
+            <div class="img">
+                <div class="img-adapt-modified" style="background-image: url(http://149.91.89.19/promo/img/logo/logo_cover.svg)"></div>
+            </div>
+        </div>
+        <div class="bonjour">
+            <h2>Hello chèr(e) "Stuff-eur"</h2>
+        </div>
+        <div class="card-info"><span class="card-title">{{ user.username }}</span></div>
+    </div>
+    <div class="btn-group btn-group-justified btn-group-lg btn-edit-profil" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="hidden-xs">Infos</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="stars" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+                <div class="hidden-xs">Scores</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="favorites" class="btn btn-primary" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+                <div class="hidden-xs">Actions</div>
+            </button>
+        </div>
+    </div>
+
+    <div class="well">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'profile.show.username'|trans }}</th>
+                        <th>{{ 'profile.show.email'|trans }}</th>
+                        <th>Nationalité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.nationalite }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade in" id="tab2">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Win</th>
+                        <th>Loose</th>
+                        <th>Score totale</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ user.win }}</td>
+                        <td>{{ user.loose }}</td>
+                        <td>{{ user.totalescore }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade in" id="tab3"><table class="table">
+                    <thead>
+                    <tr>
+                        <th>Éditer votre profil</th>
+                        <th>Voir vos parties en cours</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">Editer</a></td>
+                        <td><a href="{{ path('mesparties') }}" class="btn btn-primary">Mes Parties</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>

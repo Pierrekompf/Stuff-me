@@ -5,15 +5,76 @@
         <div class="zbackground"></div>
     </div>
 
-    <ul>
-        {% for cocktail in  cocktailtous %}
-            <li>{{ cocktail.cocktailNom }}
-                {{ cocktail.cocktailCategorie }}
-                {{ cocktail.cocktailDescription }}
-                <img src="{{ asset('assets/img/cartes/'~cocktail.cocktailImage ) }} " style="width : 150px;" />
-            </li>
-        {% endfor %}
-    </ul>
+    <!-- ==========================================================================
+    SECTION: Galerie
+    =========================================================================== -->
+    <section id="galerie">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <h2 class="muted">Nos différents cocktails</h2>
+                    <hr>
+
+                    <ul id="filters" class="clearfix">
+                        <li><a class="filter active" data-filter=".all">Tous</a></li>
+                        <li><a class="filter" data-filter=".biere">Bière</a></li>
+                        <li><a class="filter" data-filter=".tequila">Tequila</a></li>
+                        <li><a class="filter" data-filter=".cognac">Cognac</a></li>
+                        <li><a class="filter" data-filter=".vodka">Vodka</a></li>
+                        <li><a class="filter" data-filter=".rhum">Rhum</a></li>
+                    </ul>
+
+                    <div id="galerie-list">
+                        {% for cocktail in  cocktailtous %}
+                            <div class="galerie {{cocktail.cocktailCategorie}} all" data-cat="{{cocktail.cocktailCategorie}}">
+                                <div class="galerie-wrapper">
+                                    <img src="{{ asset('assets/img/cartes/'~cocktail.cocktailImage ) }} "/>
+                                    <div class="label">
+                                        <div class="label-text">
+                                            <span class="text-title">{{ cocktail.cocktailNom }}</span>
+                                            <span class="text-categorie"><small>Catégorie: </small>{{ cocktail.cocktailCategorie }}</span>
+                                            <span class="text-description">{{ cocktail.cocktailDescription }}</span>
+                                        </div>
+                                        <div class="label-bg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(function() {
+            var filterList = {
+                init: function() {
+                    // MixItUp plugin
+                    // http://mixitup.io
+                    $('#galerie-list').mixItUp({
+                        selectors: {
+                            target: '.galerie',
+                            filter: '.filter'
+                        },
+                        load: {
+                            filter: '.all'
+                        }
+                    });
+                }
+            };
+            // Run the show!
+            filterList.init();
+        });
+    </script>
 {% endblock %}
 
 {% block title %}

@@ -611,28 +611,32 @@
             </div>
         </div>
         <div class="classement">
-            <div class="col-lg-4 col-lg-offset-3">
-                <h2>Classement FR :</h2>
-                <ul>
-                    {% for user in  classement %}
-                        <li>
-                            {{ user.username }}
-                            {{ user.totaleScore }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <h2>Classement International :</h2>
-                <ul>
-                    {% for user in classementinter %}
-                        <li>
-                            {{ user.nationalite }}
-                            {{ user.username }}
-                            {{ user.totaleScore }}
-                        </li>
-                    {% endfor %}
-                </ul>
+            <div class="container-fluid">
+                <div class=" row">
+                    <div class="clsmt1 col-sm-offset-1 col-sm-4 ">
+                        <h2>Classement FR</h2>
+                        <ul>
+                            {% for user in  classement %}
+                                <li>
+                                    {{ user.username }}
+                                    {{ user.totaleScore }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="clsmt2 col-sm-offset-2 col-sm-4">
+                        <h2>Classement International</h2>
+                        <ul>
+                            {% for user in classementinter %}
+                                <li>
+                                    {{ user.nationalite }}
+                                    {{ user.username }}
+                                    {{ user.totaleScore }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
