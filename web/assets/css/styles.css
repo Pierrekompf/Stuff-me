@@ -514,6 +514,9 @@ body {
   margin-left: 0.5vw;
   text-align: center;
   padding: 3px;
+  -webkit-transition: all 0.25s!important;
+  -moz-transition: all 0.25s!important;
+  transition: all 0.25s!important;
 }
 
 .pageplateau .cartescontainer .carte img {
@@ -1006,3 +1009,40 @@ body {
   opacity: 0.7;
 }
 /* -------------------------------FIN PARALLAX------------------------------- */
+.carte-boutons {
+  display: none;
+}
+
+
+.active {
+  -moz-box-shadow: 0px 0px 20px 0px #fff!important;
+  -webkit-box-shadow: 0px 0px 20px 0px #fff!important;
+  -o-box-shadow: 0px 0px 20px 0px #fff!important;
+  box-shadow: 0px 0px 20px 0px #fff!important;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#fff, Direction=NaN, Strength=20)!important;
+  -webkit-transition: all 0.25s!important;
+  -moz-transition: all 0.25s!important;
+  transition: all 0.25s!important;
+}
+
+.active .carte-boutons {
+  display: block!important;
+}
+
+.tourde {
+  position: absolute;
+  color: #e2c57a;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  font-family: "Hamburger Heaven";
+}
+
+.gagnant {
+  position: absolute;
+  color: #e2c57a;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  font-family: "Hamburger Heaven";
+}

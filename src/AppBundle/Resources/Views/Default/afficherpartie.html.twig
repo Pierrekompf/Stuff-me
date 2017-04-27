@@ -7,13 +7,10 @@
 
     <div class="pageplateau container-fluid">
         <div class="plateau">
-            <!--<h1>
-                Partie entre {{ parties[0].joueur1 }} et {{ parties[0].joueur2 }}
-                <br>
-                {% if parties[0].gagnant  != null %}
-                    Gagnant : {{ parties[0].gagnant }}
-                {% endif %}
-            </h1>-->
+            <div class="gagnant">
+                <h1>
+
+                </h1></div>
             <div class="top">
 
             </div>
@@ -24,9 +21,13 @@
             </div>
 
             <!------ Tour de ----->
-            {#<div class="tourde">#}
-            {#<h3>Tour de : {{ parties[0].partieTour }}</h3>#}
-            {#</div>#}
+            <div class="tourde">
+                {% if parties[0].gagnant  != null %}
+                    Gagnant : {{ parties[0].gagnant }}
+                {% else %}
+                <h3>Tour de : {{ parties[0].partieTour }}</h3>
+                {% endif %}
+            </div>
 
             <!--systeme de passement de tour automatique fonctionnelle
     <div>
@@ -46,25 +47,23 @@
                     {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ1' %}
                         {% set i = i + 1 %}
                         <li class="carte">
-                            <a href="javascript:visibilite('{{ carte.id }}');"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
+                            <a class="test" href="#"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
                             {% if parties[0].partietour == parties[0].joueur1 and user.username == parties[0].joueur1 and parties[0].j1cartejouer == '0' %}
                                 <div class="carte-boutons" id="{{ carte.id }}" style="display: none;">
                                     <a class="boutons-jouer" href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a>
                                     <a class="boutons-defausser" href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
                                 </div>
+                                <script>
+                                    $(".test").on('click', function(e){
+                                        $(".cartescontainer .active").removeClass('active');
+                                        $(this).parent().addClass('active');
+                                        e.preventDefault();
+                                    });
+                                </script>
                             {% endif %}
                         </li>
-                        <script>
-                            var divPrecedent=document.getElementById('{{ carte.id }}');
-                            function visibilite(divId)
-                            {
-                                divPrecedent.style.display='none';
-                                divPrecedent=document.getElementById(divId);
-                                divPrecedent.style.display='';
-                            }
-                        </script>
-                    {% endfor %}
 
+                    {% endfor %}
                 </div>
 
             {% else %}
@@ -74,25 +73,23 @@
                     {% for carte in cartes if carte.parties.id == parties[0].id and carte.carteSituation == 'mainJ2' %}
                         {% set j = j + 1 %}
                         <div class="carte">
-                            <a href="javascript:visibilite('{{ carte.id }}');"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
+                            <a class="test" href="#"><img src="{{ asset('assets/img/cartes/'~carte.modeles.cocktailImage ) }} "/></a>
                             {% if parties[0].partietour == parties[0].joueur2 and user.username == parties[0].joueur2 and parties[0].j2cartejouer == '0'%}
-                                <div class="carte-boutons" id="{{ carte.id }}" style="display: none;">
+                                <div class="carte-boutons" id="{{ carte.id }}">
                                     <a class="boutons-jouer" href="{{ path('jouer', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Jouer</a>
                                     <a class="boutons-defausser" href="{{ path('defausserCarte', {'partieid': parties[0].id, 'carteid': carte.id}) }}">Défausser</a>
                                 </div>
+                                <script>
+                                    $(".test").on('click', function(e){
+                                        $(".cartescontainer .active").removeClass('active');
+                                        $(this).parent().addClass('active');
+                                        e.preventDefault();
+                                    });
+                                </script>
                             {% else %}
 
                             {% endif %}
                         </div>
-                        <script>
-                            var divPrecedent=document.getElementById('{{ carte.id }}');
-                            function visibilite(divId)
-                            {
-                                divPrecedent.style.display='none';
-                                divPrecedent=document.getElementById(divId);
-                                divPrecedent.style.display='';
-                            }
-                        </script>
                     {% endfor %}
                 </div>
             {% endif %}
