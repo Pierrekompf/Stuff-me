@@ -150,12 +150,14 @@ class PartieController extends Controller
                 if ($joueur2->getTotaleScore() >= 50){
                     $joueur2->setTotaleScore( $joueur2->getTotaleScore() - 50);
                 }
+                $joueur1->setWin($joueur1->getWin() + 1 );
             } elseif ($partie->getPartieJoueur1Score() < $partie->getPartieJoueur2Score()) {
                 $partie->setGagnant($partie->getJoueur2());
                 if ($joueur1->getTotaleScore() >= 50) {
                     $joueur1->setTotaleScore($joueur1->getTotaleScore() - 50);
                 }
                 $joueur2->setTotaleScore( $joueur2->getTotaleScore() + 100);
+                $joueur2->setWin($joueur2->getWin() + 1 );
             } else {
                 $partie->setGagnant('Egalité');
                 $joueur1->setTotaleScore($joueur1->getTotaleScore() + 50);
